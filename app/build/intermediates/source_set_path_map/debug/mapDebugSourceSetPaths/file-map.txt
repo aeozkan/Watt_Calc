@@ -1,0 +1,52 @@
+com.example.wattcalculator.app-material-icons-extended-release-0 C:\Users\aeozk\.gradle\caches\8.9\transforms\10f0d0fde538df560f145822b7779e30\transformed\material-icons-extended-release\res
+com.example.wattcalculator.app-ui-tooling-data-release-1 C:\Users\aeozk\.gradle\caches\8.9\transforms\12ca33581e5b151e8d4fa66a86b0cef5\transformed\ui-tooling-data-release\res
+com.example.wattcalculator.app-graphics-path-1.0.1-2 C:\Users\aeozk\.gradle\caches\8.9\transforms\2086f5afd8591d19b5b81aebaca6fab9\transformed\graphics-path-1.0.1\res
+com.example.wattcalculator.app-material-release-3 C:\Users\aeozk\.gradle\caches\8.9\transforms\23d9f1674c671b9058627e69f08cc9a9\transformed\material-release\res
+com.example.wattcalculator.app-annotation-experimental-1.4.1-4 C:\Users\aeozk\.gradle\caches\8.9\transforms\23ebc9546ff9cefedb71c361a7805d26\transformed\annotation-experimental-1.4.1\res
+com.example.wattcalculator.app-runtime-release-5 C:\Users\aeozk\.gradle\caches\8.9\transforms\24e214112f05f099e40ba9cb72f4f3c0\transformed\runtime-release\res
+com.example.wattcalculator.app-ui-geometry-release-6 C:\Users\aeozk\.gradle\caches\8.9\transforms\25a65212de26401ef7cdc32e88d2eec7\transformed\ui-geometry-release\res
+com.example.wattcalculator.app-lifecycle-viewmodel-release-7 C:\Users\aeozk\.gradle\caches\8.9\transforms\2acad8a3fe10cd81198bf6136db086ed\transformed\lifecycle-viewmodel-release\res
+com.example.wattcalculator.app-material-ripple-release-8 C:\Users\aeozk\.gradle\caches\8.9\transforms\307cec2cf050b51646bca0fa9fae2042\transformed\material-ripple-release\res
+com.example.wattcalculator.app-lifecycle-runtime-ktx-release-9 C:\Users\aeozk\.gradle\caches\8.9\transforms\39264f4f03bc4875f508cb147bdcb0f5\transformed\lifecycle-runtime-ktx-release\res
+com.example.wattcalculator.app-startup-runtime-1.1.1-10 C:\Users\aeozk\.gradle\caches\8.9\transforms\48b0afdaa90d040672ec7eb00aa9c080\transformed\startup-runtime-1.1.1\res
+com.example.wattcalculator.app-lifecycle-viewmodel-ktx-2.8.7-11 C:\Users\aeozk\.gradle\caches\8.9\transforms\4a0407bcf51e4118750afb83ff8949fe\transformed\lifecycle-viewmodel-ktx-2.8.7\res
+com.example.wattcalculator.app-activity-1.9.3-12 C:\Users\aeozk\.gradle\caches\8.9\transforms\4a314cdb5f9029ffd443403b386defbb\transformed\activity-1.9.3\res
+com.example.wattcalculator.app-runtime-saveable-release-13 C:\Users\aeozk\.gradle\caches\8.9\transforms\4d1832ef00a65b98e69281a6fcbb4312\transformed\runtime-saveable-release\res
+com.example.wattcalculator.app-customview-poolingcontainer-1.0.0-14 C:\Users\aeozk\.gradle\caches\8.9\transforms\4ddf4f5df5c0ebcf5d3c521295ae79b3\transformed\customview-poolingcontainer-1.0.0\res
+com.example.wattcalculator.app-tracing-1.2.0-15 C:\Users\aeozk\.gradle\caches\8.9\transforms\4f1bb971223a31f1a0476ef4fe806d04\transformed\tracing-1.2.0\res
+com.example.wattcalculator.app-savedstate-ktx-1.2.1-16 C:\Users\aeozk\.gradle\caches\8.9\transforms\560b022a16bb96896febffe9abec5d34\transformed\savedstate-ktx-1.2.1\res
+com.example.wattcalculator.app-profileinstaller-1.3.1-17 C:\Users\aeozk\.gradle\caches\8.9\transforms\682b413833d3f610d075c38852180627\transformed\profileinstaller-1.3.1\res
+com.example.wattcalculator.app-lifecycle-runtime-compose-release-18 C:\Users\aeozk\.gradle\caches\8.9\transforms\68a1a17be7c3203d2cde1c994128bee8\transformed\lifecycle-runtime-compose-release\res
+com.example.wattcalculator.app-animation-release-19 C:\Users\aeozk\.gradle\caches\8.9\transforms\6d186b49696a1a1b0cee03470fb16cd9\transformed\animation-release\res
+com.example.wattcalculator.app-material-icons-core-release-20 C:\Users\aeozk\.gradle\caches\8.9\transforms\6e153de0d61c31fafce490b6da5ae5de\transformed\material-icons-core-release\res
+com.example.wattcalculator.app-ui-release-21 C:\Users\aeozk\.gradle\caches\8.9\transforms\6f80d4d9c1dda326593c90fa6eb192db\transformed\ui-release\res
+com.example.wattcalculator.app-ui-tooling-preview-release-22 C:\Users\aeozk\.gradle\caches\8.9\transforms\72f32f80cb885b040c5c4a1f4dda0064\transformed\ui-tooling-preview-release\res
+com.example.wattcalculator.app-ui-graphics-release-23 C:\Users\aeozk\.gradle\caches\8.9\transforms\747d70b93b4d461b3efc7d5ca1571dc4\transformed\ui-graphics-release\res
+com.example.wattcalculator.app-core-ktx-1.15.0-24 C:\Users\aeozk\.gradle\caches\8.9\transforms\755fca95ca4acab9ec52da87614c163d\transformed\core-ktx-1.15.0\res
+com.example.wattcalculator.app-lifecycle-livedata-core-2.8.7-25 C:\Users\aeozk\.gradle\caches\8.9\transforms\8b78f55eda17e6a5ad4063aee8347183\transformed\lifecycle-livedata-core-2.8.7\res
+com.example.wattcalculator.app-activity-compose-1.9.3-26 C:\Users\aeozk\.gradle\caches\8.9\transforms\8c0c6c2b5a8591dbf6a7f069e6876015\transformed\activity-compose-1.9.3\res
+com.example.wattcalculator.app-activity-ktx-1.9.3-27 C:\Users\aeozk\.gradle\caches\8.9\transforms\923fc600c00a52851aad7a63af22b29d\transformed\activity-ktx-1.9.3\res
+com.example.wattcalculator.app-foundation-layout-release-28 C:\Users\aeozk\.gradle\caches\8.9\transforms\9c0dc6c2d0bce9cde0a86845a50fcb04\transformed\foundation-layout-release\res
+com.example.wattcalculator.app-ui-text-release-29 C:\Users\aeozk\.gradle\caches\8.9\transforms\9f218469dc1882ccb111f7f2a05de956\transformed\ui-text-release\res
+com.example.wattcalculator.app-savedstate-1.2.1-30 C:\Users\aeozk\.gradle\caches\8.9\transforms\9f7444a3db4962bbc3dd086b68a97e95\transformed\savedstate-1.2.1\res
+com.example.wattcalculator.app-core-runtime-2.2.0-31 C:\Users\aeozk\.gradle\caches\8.9\transforms\a45e4ab22cc7cfd98dfa87815f492389\transformed\core-runtime-2.2.0\res
+com.example.wattcalculator.app-ui-test-manifest-1.7.5-32 C:\Users\aeozk\.gradle\caches\8.9\transforms\ad7dc35936bedb9268d7341e85d2fdba\transformed\ui-test-manifest-1.7.5\res
+com.example.wattcalculator.app-lifecycle-viewmodel-compose-release-33 C:\Users\aeozk\.gradle\caches\8.9\transforms\b8379a7a658024d9e7edbe743f830a53\transformed\lifecycle-viewmodel-compose-release\res
+com.example.wattcalculator.app-ui-util-release-34 C:\Users\aeozk\.gradle\caches\8.9\transforms\bf41987148d70f6542a5c4dd6c0c72d9\transformed\ui-util-release\res
+com.example.wattcalculator.app-ui-unit-release-35 C:\Users\aeozk\.gradle\caches\8.9\transforms\c646b3089fbd6ad5153ee72b3f87b93d\transformed\ui-unit-release\res
+com.example.wattcalculator.app-lifecycle-runtime-release-36 C:\Users\aeozk\.gradle\caches\8.9\transforms\ca098b58ee29596fdc692ab3f28eca04\transformed\lifecycle-runtime-release\res
+com.example.wattcalculator.app-material3-release-37 C:\Users\aeozk\.gradle\caches\8.9\transforms\d27fdd08da7072dd25b2ff560f1ea89b\transformed\material3-release\res
+com.example.wattcalculator.app-core-1.15.0-38 C:\Users\aeozk\.gradle\caches\8.9\transforms\d89dedd33f891a13e8a04b79d7e19015\transformed\core-1.15.0\res
+com.example.wattcalculator.app-animation-core-release-39 C:\Users\aeozk\.gradle\caches\8.9\transforms\d923b209ba64ad841cfa0847471b999a\transformed\animation-core-release\res
+com.example.wattcalculator.app-foundation-release-40 C:\Users\aeozk\.gradle\caches\8.9\transforms\e00019ea4fec06f028c5739e8068ac3e\transformed\foundation-release\res
+com.example.wattcalculator.app-lifecycle-process-2.8.7-41 C:\Users\aeozk\.gradle\caches\8.9\transforms\e9ad1045356f1e570f389155e22183b7\transformed\lifecycle-process-2.8.7\res
+com.example.wattcalculator.app-emoji2-1.3.0-42 C:\Users\aeozk\.gradle\caches\8.9\transforms\f09335aa29b4a7102b728956a319c9af\transformed\emoji2-1.3.0\res
+com.example.wattcalculator.app-lifecycle-viewmodel-savedstate-2.8.7-43 C:\Users\aeozk\.gradle\caches\8.9\transforms\f74dd515a0347e5f537a36a1dba9c00c\transformed\lifecycle-viewmodel-savedstate-2.8.7\res
+com.example.wattcalculator.app-ui-tooling-release-44 C:\Users\aeozk\.gradle\caches\8.9\transforms\fee544c97dad524c8407055d6c0e226a\transformed\ui-tooling-release\res
+com.example.wattcalculator.app-pngs-45 F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\build\generated\res\pngs\debug
+com.example.wattcalculator.app-resValues-46 F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\build\generated\res\resValues\debug
+com.example.wattcalculator.app-packageDebugResources-47 F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.example.wattcalculator.app-packageDebugResources-48 F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.example.wattcalculator.app-debug-49 F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\build\intermediates\merged_res\debug\mergeDebugResources
+com.example.wattcalculator.app-debug-50 F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\debug\res
+com.example.wattcalculator.app-main-51 F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\res

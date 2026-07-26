@@ -106,8 +106,13 @@ fun WattGauge(
                             tint = if (isCharging) NeonAmber else TextSecondary,
                             modifier = Modifier.size(32.dp)
                         )
+                        val formattedWatts = if (isCharging) {
+                            String.format(Locale.US, "%.1f", watts)
+                        } else {
+                            String.format(Locale.US, "-%.1f", watts)
+                        }
                         Text(
-                            text = String.format(Locale.US, "%.1f", watts),
+                            text = formattedWatts,
                             style = MaterialTheme.typography.displayLarge.copy(
                                 fontSize = 44.sp,
                                 fontWeight = FontWeight.ExtraBold

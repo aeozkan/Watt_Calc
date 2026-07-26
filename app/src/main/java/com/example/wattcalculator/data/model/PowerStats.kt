@@ -1,5 +1,10 @@
 package com.example.wattcalculator.data.model
 
+data class WattSample(
+    val watt: Double,
+    val isCharging: Boolean
+)
+
 data class PowerStats(
     val voltageVolts: Double = 0.0,
     val currentAmperes: Double = 0.0,
@@ -27,5 +32,9 @@ data class BenchmarkSession(
     val avgAmperes: Double,
     val batteryLevelStart: Int,
     val batteryLevelEnd: Int,
+    val startTimeMillis: Long,
+    val endTimeMillis: Long,
+    val isCharging: Boolean = true,
+    val wattSamples: List<WattSample> = emptyList(),
     val timestamp: Long = System.currentTimeMillis()
 )

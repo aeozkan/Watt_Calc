@@ -35,7 +35,7 @@ import java.util.Locale
 @Composable
 fun HomeScreen(
     powerStats: PowerStats,
-    wattHistory: List<Pair<Long, Double>>,
+    wattHistory: List<com.example.wattcalculator.data.model.WattSample>,
     onResetStats: () -> Unit
 ) {
     val scrollState = rememberScrollState()
@@ -168,7 +168,7 @@ fun HomeScreen(
                 value = String.format(Locale.US, "%.1f", powerStats.temperatureCelsius),
                 unit = "°C",
                 icon = Icons.Default.Thermostat,
-                iconColor = Color(244, 63, 94),
+                iconColor = Color(0xFFF43F5E),
                 modifier = Modifier.weight(1f)
             )
         }

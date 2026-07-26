@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
@@ -19,15 +18,20 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.wattcalculator.data.model.WattSample
 import com.example.wattcalculator.ui.theme.NeonCyan
 import com.example.wattcalculator.ui.theme.TextSecondary
 import java.util.Locale
 
 @Composable
 fun PowerChart(
-    history: List<Pair<Long, Double>>,
+    history: List<WattSample>,
     modifier: Modifier = Modifier
 ) {
+    val lastSample = history.lastOrNull()
+    val isChargingNow = lastSample?.isCharging ?: false
+    val topRightColor = if (isChargingNow) NeonCyan else TextSecondary
+
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -48,13 +52,18 @@ fun PowerChart(
                     fontWeight = FontWeight.Bold,
                     color = TextSecondary
                 )
-                val currentWatts = history.lastOrNull()?.second ?: 0.0
+                val currentWatts = lastSample?.watt ?: 0.0
+                val formattedWatts = if (isChargingNow) {
+                    String.format(Locale.US, "%.1f W", currentWatts)
+                } else {
+                    String.format(Locale.US, "-%.1f W", currentWatts)
+                }
                 Text(
-                    text = String.format(Locale.US, "%.1f W", currentWatts),
+                    text = formattedWatts,
                     fontSize = 12.sp,
                     fontFamily = FontFamily.Monospace,
                     fontWeight = FontWeight.Bold,
-                    color = NeonCyan
+                    color = topRightColor
                 )
             }
 
@@ -78,49 +87,48 @@ fun PowerChart(
                     }
                 } else {
                     Canvas(modifier = Modifier.fillMaxSize()) {
-                        val maxWatts = (history.maxOfOrNull { it.second } ?: 10.0).coerceAtLeast(10.0).toFloat()
+                        val maxWatts = (history.maxOfOrNull { it.watt } ?: 10.0).coerceAtLeast(10.0).toFloat()
                         val minWatts = 0.0f
 
                         val stepX = size.width / (history.size - 1).coerceAtLeast(1)
 
-                        val linePath = Path()
-                        val fillPath = Path()
+                        val chargingColor = NeonCyan
+                        val dischargingColor = TextSecondary
 
-                        history.forEachIndexed { index, pair ->
-                            val x = index * stepX
-                            val wattVal = pair.second.toFloat()
-                            val normalizedY = (wattVal - minWatts) / (maxWatts - minWatts)
-                            val y = size.height - (normalizedY * size.height)
+                        for (i in 0 until history.size - 1) {
+                            val s1 = history[i]
+                            val s2 = history[i + 1]
 
-                            if (index == 0) {
-                                linePath.moveTo(x, y)
-                                fillPath.moveTo(x, size.height)
-                                fillPath.lineTo(x, y)
-                            } else {
-                                linePath.lineTo(x, y)
-                                fillPath.lineTo(x, y)
+                            val x1 = i * stepX
+                            val y1 = size.height - ((s1.watt.toFloat() - minWatts) / (maxWatts - minWatts) * size.height)
+
+                            val x2 = (i + 1) * stepX
+                            val y2 = size.height - ((s2.watt.toFloat() - minWatts) / (maxWatts - minWatts) * size.height)
+
+                            val segmentColor = if (s2.isCharging) chargingColor else dischargingColor
+
+                            // Draw segment fill polygon under line
+                            val fillPath = Path().apply {
+                                moveTo(x1, size.height)
+                                lineTo(x1, y1)
+                                lineTo(x2, y2)
+                                lineTo(x2, size.height)
+                                close()
                             }
-
-                            if (index == history.size - 1) {
-                                fillPath.lineTo(x, size.height)
-                                fillPath.close()
-                            }
-                        }
-
-                        // Fill under line with gradient
-                        drawPath(
-                            path = fillPath,
-                            brush = Brush.verticalGradient(
-                                colors = listOf(NeonCyan.copy(alpha = 0.35f), Color.Transparent)
+                            drawPath(
+                                path = fillPath,
+                                color = segmentColor.copy(alpha = 0.2f)
                             )
-                        )
 
-                        // Draw main curve line
-                        drawPath(
-                            path = linePath,
-                            color = NeonCyan,
-                            style = Stroke(width = 3.dp.toPx(), cap = StrokeCap.Round)
-                        )
+                            // Draw segment line
+                            drawLine(
+                                color = segmentColor,
+                                start = androidx.compose.ui.geometry.Offset(x1, y1),
+                                end = androidx.compose.ui.geometry.Offset(x2, y2),
+                                strokeWidth = 3.dp.toPx(),
+                                cap = StrokeCap.Round
+                            )
+                        }
                     }
                 }
             }
