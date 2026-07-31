@@ -45,6 +45,7 @@
 
         <activity
             android:name="com.hobbycoding.wattbench.MainActivity"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.WattCalculator" >

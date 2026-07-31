@@ -1,0 +1,169 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.hobbycoding.wattbench"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="26"
+9        android:targetSdkVersion="35" />
+10
+11    <uses-permission android:name="android.permission.BATTERY_STATS" />
+11-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:4:5-72
+11-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:4:22-69
+12    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+12-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:5:5-77
+12-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:5:22-74
+13    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+13-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:6:5-89
+13-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:6:22-86
+14    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+14-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:7:5-77
+14-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:7:22-74
+15    <uses-permission android:name="android.permission.WAKE_LOCK" />
+15-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:8:5-68
+15-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:8:22-65
+16
+17    <permission
+17-->[androidx.core:core:1.15.0] C:\Users\aeozk\.gradle\caches\8.9\transforms\d89dedd33f891a13e8a04b79d7e19015\transformed\core-1.15.0\AndroidManifest.xml:22:5-24:47
+18        android:name="com.hobbycoding.wattbench.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+18-->[androidx.core:core:1.15.0] C:\Users\aeozk\.gradle\caches\8.9\transforms\d89dedd33f891a13e8a04b79d7e19015\transformed\core-1.15.0\AndroidManifest.xml:23:9-81
+19        android:protectionLevel="signature" />
+19-->[androidx.core:core:1.15.0] C:\Users\aeozk\.gradle\caches\8.9\transforms\d89dedd33f891a13e8a04b79d7e19015\transformed\core-1.15.0\AndroidManifest.xml:24:9-44
+20
+21    <uses-permission android:name="com.hobbycoding.wattbench.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+21-->[androidx.core:core:1.15.0] C:\Users\aeozk\.gradle\caches\8.9\transforms\d89dedd33f891a13e8a04b79d7e19015\transformed\core-1.15.0\AndroidManifest.xml:26:5-97
+21-->[androidx.core:core:1.15.0] C:\Users\aeozk\.gradle\caches\8.9\transforms\d89dedd33f891a13e8a04b79d7e19015\transformed\core-1.15.0\AndroidManifest.xml:26:22-94
+22
+23    <application
+23-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:10:5-41:19
+24        android:allowBackup="true"
+24-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:11:9-35
+25        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+25-->[androidx.core:core:1.15.0] C:\Users\aeozk\.gradle\caches\8.9\transforms\d89dedd33f891a13e8a04b79d7e19015\transformed\core-1.15.0\AndroidManifest.xml:28:18-86
+26        android:dataExtractionRules="@xml/data_extraction_rules"
+26-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:12:9-65
+27        android:extractNativeLibs="false"
+28        android:fullBackupContent="@xml/backup_rules"
+28-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:13:9-54
+29        android:icon="@mipmap/ic_launcher"
+29-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:14:9-43
+30        android:label="@string/app_name"
+30-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:15:9-41
+31        android:roundIcon="@mipmap/ic_launcher_round"
+31-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:16:9-54
+32        android:supportsRtl="true"
+32-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:17:9-35
+33        android:testOnly="true"
+34        android:theme="@style/Theme.WattCalculator" >
+34-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:18:9-52
+35        <service
+35-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:20:9-28:19
+36            android:name="com.hobbycoding.wattbench.service.PowerTelemetryService"
+36-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:21:13-83
+37            android:enabled="true"
+37-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:22:13-35
+38            android:exported="false"
+38-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:23:13-37
+39            android:foregroundServiceType="specialUse" >
+39-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:24:13-55
+40            <property
+40-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:25:13-27:94
+41                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+41-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:26:17-76
+42                android:value="Realtime hardware power measurement while screen is locked" />
+42-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:27:17-91
+43        </service>
+44
+45        <activity
+45-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:30:9-40:20
+46            android:name="com.hobbycoding.wattbench.MainActivity"
+46-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:31:13-66
+47            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize"
+47-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:32:13-91
+48            android:exported="true"
+48-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:33:13-36
+49            android:label="@string/app_name"
+49-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:34:13-45
+50            android:theme="@style/Theme.WattCalculator" >
+50-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:35:13-56
+51            <intent-filter>
+51-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:36:13-39:29
+52                <action android:name="android.intent.action.MAIN" />
+52-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:37:17-69
+52-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:37:25-66
+53
+54                <category android:name="android.intent.category.LAUNCHER" />
+54-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:38:17-77
+54-->F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:38:27-74
+55            </intent-filter>
+56        </activity>
+57
+58        <provider
+58-->[androidx.emoji2:emoji2:1.3.0] C:\Users\aeozk\.gradle\caches\8.9\transforms\f09335aa29b4a7102b728956a319c9af\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+59            android:name="androidx.startup.InitializationProvider"
+59-->[androidx.emoji2:emoji2:1.3.0] C:\Users\aeozk\.gradle\caches\8.9\transforms\f09335aa29b4a7102b728956a319c9af\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
+60            android:authorities="com.hobbycoding.wattbench.androidx-startup"
+60-->[androidx.emoji2:emoji2:1.3.0] C:\Users\aeozk\.gradle\caches\8.9\transforms\f09335aa29b4a7102b728956a319c9af\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
+61            android:exported="false" >
+61-->[androidx.emoji2:emoji2:1.3.0] C:\Users\aeozk\.gradle\caches\8.9\transforms\f09335aa29b4a7102b728956a319c9af\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
+62            <meta-data
+62-->[androidx.emoji2:emoji2:1.3.0] C:\Users\aeozk\.gradle\caches\8.9\transforms\f09335aa29b4a7102b728956a319c9af\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+63                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+63-->[androidx.emoji2:emoji2:1.3.0] C:\Users\aeozk\.gradle\caches\8.9\transforms\f09335aa29b4a7102b728956a319c9af\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
+64                android:value="androidx.startup" />
+64-->[androidx.emoji2:emoji2:1.3.0] C:\Users\aeozk\.gradle\caches\8.9\transforms\f09335aa29b4a7102b728956a319c9af\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
+65            <meta-data
+65-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\aeozk\.gradle\caches\8.9\transforms\e9ad1045356f1e570f389155e22183b7\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:29:13-31:52
+66                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+66-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\aeozk\.gradle\caches\8.9\transforms\e9ad1045356f1e570f389155e22183b7\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:30:17-78
+67                android:value="androidx.startup" />
+67-->[androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\aeozk\.gradle\caches\8.9\transforms\e9ad1045356f1e570f389155e22183b7\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:31:17-49
+68            <meta-data
+68-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\aeozk\.gradle\caches\8.9\transforms\682b413833d3f610d075c38852180627\transformed\profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
+69                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+69-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\aeozk\.gradle\caches\8.9\transforms\682b413833d3f610d075c38852180627\transformed\profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+70                android:value="androidx.startup" />
+70-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\aeozk\.gradle\caches\8.9\transforms\682b413833d3f610d075c38852180627\transformed\profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
+71        </provider>
+72
+73        <receiver
+73-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\aeozk\.gradle\caches\8.9\transforms\682b413833d3f610d075c38852180627\transformed\profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
+74            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+74-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\aeozk\.gradle\caches\8.9\transforms\682b413833d3f610d075c38852180627\transformed\profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
+75            android:directBootAware="false"
+75-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\aeozk\.gradle\caches\8.9\transforms\682b413833d3f610d075c38852180627\transformed\profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
+76            android:enabled="true"
+76-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\aeozk\.gradle\caches\8.9\transforms\682b413833d3f610d075c38852180627\transformed\profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
+77            android:exported="true"
+77-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\aeozk\.gradle\caches\8.9\transforms\682b413833d3f610d075c38852180627\transformed\profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
+78            android:permission="android.permission.DUMP" >
+78-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\aeozk\.gradle\caches\8.9\transforms\682b413833d3f610d075c38852180627\transformed\profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
+79            <intent-filter>
+79-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\aeozk\.gradle\caches\8.9\transforms\682b413833d3f610d075c38852180627\transformed\profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
+80                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+80-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\aeozk\.gradle\caches\8.9\transforms\682b413833d3f610d075c38852180627\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
+80-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\aeozk\.gradle\caches\8.9\transforms\682b413833d3f610d075c38852180627\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
+81            </intent-filter>
+82            <intent-filter>
+82-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\aeozk\.gradle\caches\8.9\transforms\682b413833d3f610d075c38852180627\transformed\profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
+83                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+83-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\aeozk\.gradle\caches\8.9\transforms\682b413833d3f610d075c38852180627\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
+83-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\aeozk\.gradle\caches\8.9\transforms\682b413833d3f610d075c38852180627\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
+84            </intent-filter>
+85            <intent-filter>
+85-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\aeozk\.gradle\caches\8.9\transforms\682b413833d3f610d075c38852180627\transformed\profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
+86                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+86-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\aeozk\.gradle\caches\8.9\transforms\682b413833d3f610d075c38852180627\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
+86-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\aeozk\.gradle\caches\8.9\transforms\682b413833d3f610d075c38852180627\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
+87            </intent-filter>
+88            <intent-filter>
+88-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\aeozk\.gradle\caches\8.9\transforms\682b413833d3f610d075c38852180627\transformed\profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
+89                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+89-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\aeozk\.gradle\caches\8.9\transforms\682b413833d3f610d075c38852180627\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
+89-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\aeozk\.gradle\caches\8.9\transforms\682b413833d3f610d075c38852180627\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
+90            </intent-filter>
+91        </receiver>
+92    </application>
+93
+94</manifest>

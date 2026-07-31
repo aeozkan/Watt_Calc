@@ -50,18 +50,20 @@ fun HomeScreen(
     ) {
         // App Header
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(48.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column {
                 Text(
                     text = "WATT CALCULATOR",
-                    fontSize = 20.sp,
+                    fontSize = 18.sp,
                     fontWeight = FontWeight.Black,
                     fontFamily = FontFamily.Monospace,
                     color = NeonCyan,
-                    letterSpacing = 1.5.sp
+                    letterSpacing = 1.2.sp
                 )
                 Text(
                     text = if (powerStats.isCharging) "CHARGING ACTIVE • ${powerStats.chargePlugType.uppercase()}" else "DISCONNECTED",

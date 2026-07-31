@@ -6,6 +6,7 @@ import androidx.compose.material.icons.filled.Assessment
 import androidx.compose.material.icons.filled.ElectricBolt
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hobbycoding.wattbench.ui.theme.NeonCyan
@@ -16,7 +17,7 @@ import com.hobbycoding.wattbench.ui.viewmodel.WattViewModel
 fun MainTabScreen(
     viewModel: WattViewModel = viewModel()
 ) {
-    var selectedTab by remember { mutableStateOf(0) }
+    var selectedTab by rememberSaveable { mutableIntStateOf(0) }
 
     val powerStats by viewModel.powerStats.collectAsState()
     val wattHistory by viewModel.wattHistory.collectAsState()

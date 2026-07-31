@@ -2,6 +2,7 @@ package com.hobbycoding.wattbench.ui.screens
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -22,8 +23,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -35,10 +40,21 @@ import com.hobbycoding.wattbench.ui.theme.DangerRed
 import com.hobbycoding.wattbench.ui.theme.NeonAmber
 import com.hobbycoding.wattbench.ui.theme.NeonCyan
 import com.hobbycoding.wattbench.ui.theme.NeonGreen
+import com.hobbycoding.wattbench.ui.theme.PeakGold
 import com.hobbycoding.wattbench.ui.theme.TextSecondary
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+
+fun formatDuration(totalSeconds: Int): String {
+    val minutes = totalSeconds / 60
+    val seconds = totalSeconds % 60
+    return when {
+        minutes > 0 && seconds > 0 -> "$minutes dk $seconds sn"
+        minutes > 0 -> "$minutes dk"
+        else -> "$seconds sn"
+    }
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,166 +69,176 @@ fun BenchmarkScreen(
     var adapterInput by remember { mutableStateOf("") }
     var cableInput by remember { mutableStateOf("") }
 
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
-            .padding(16.dp)
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Text(
-            text = "CHARGER & CABLE BENCHMARK",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Black,
-            fontFamily = FontFamily.Monospace,
-            color = NeonAmber,
-            letterSpacing = 1.2.sp
-        )
-        Text(
-            text = "Compare different charging bricks and USB cables",
-            fontSize = 12.sp,
-            fontFamily = FontFamily.Monospace,
-            color = TextSecondary
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Session Setup Card
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(20.dp),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
-        ) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                Text(
-                    text = if (isRecording) "TEST IN PROGRESS (RECORDING BACKGROUND DATA)..." else "START NEW BENCHMARK RUN",
-                    fontSize = 12.sp,
-                    fontFamily = FontFamily.Monospace,
-                    fontWeight = FontWeight.Bold,
-                    color = if (isRecording) NeonGreen else NeonCyan
-                )
-
-                Spacer(modifier = Modifier.height(12.dp))
-
-                OutlinedTextField(
-                    value = adapterInput,
-                    onValueChange = { adapterInput = it },
-                    label = { Text("Charger / Adapter Name (e.g. Xiaomi 90W)") },
-                    enabled = !isRecording,
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = NeonCyan,
-                        unfocusedBorderColor = Color(0xFF475569)
-                    )
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                OutlinedTextField(
-                    value = cableInput,
-                    onValueChange = { cableInput = it },
-                    label = { Text("Cable Name (e.g. 6A Type-C Cable)") },
-                    enabled = !isRecording,
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = NeonCyan,
-                        unfocusedBorderColor = Color(0xFF475569)
-                    )
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Button(
-                    onClick = {
-                        if (isRecording) {
-                            onStopRecording()
-                        } else {
-                            onStartRecording(adapterInput, cableInput)
-                        }
-                    },
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = if (isRecording) DangerRed else NeonGreen
-                    )
-                ) {
-                    Icon(
-                        imageVector = if (isRecording) Icons.Default.Stop else Icons.Default.PlayArrow,
-                        contentDescription = null
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
+        // Header Section
+        item {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column {
                     Text(
-                        text = if (isRecording) "STOP BENCHMARK TEST" else "START BENCHMARK TEST",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp
+                        text = "CHARGER & CABLE BENCHMARK",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Black,
+                        fontFamily = FontFamily.Monospace,
+                        color = NeonAmber,
+                        letterSpacing = 1.2.sp
+                    )
+                    Text(
+                        text = "Compare different charging bricks and USB cables",
+                        fontSize = 11.sp,
+                        fontFamily = FontFamily.Monospace,
+                        color = TextSecondary
                     )
                 }
+            }
+        }
 
-                if (isRecording) {
+        // Session Setup Card
+        item {
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(20.dp),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Text(
+                        text = if (isRecording) "TEST IN PROGRESS (RECORDING BACKGROUND DATA)..." else "START NEW BENCHMARK RUN",
+                        fontSize = 12.sp,
+                        fontFamily = FontFamily.Monospace,
+                        fontWeight = FontWeight.Bold,
+                        color = if (isRecording) NeonGreen else NeonCyan
+                    )
+
                     Spacer(modifier = Modifier.height(12.dp))
-                    Row(
+
+                    OutlinedTextField(
+                        value = adapterInput,
+                        onValueChange = { adapterInput = it },
+                        label = { Text("Charger / Adapter Name (e.g. Xiaomi 90W)") },
+                        enabled = !isRecording,
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = NeonCyan,
+                            unfocusedBorderColor = Color(0xFF475569)
+                        )
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    OutlinedTextField(
+                        value = cableInput,
+                        onValueChange = { cableInput = it },
+                        label = { Text("Cable Name (e.g. 6A Type-C Cable)") },
+                        enabled = !isRecording,
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = NeonCyan,
+                            unfocusedBorderColor = Color(0xFF475569)
+                        )
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Button(
+                        onClick = {
+                            if (isRecording) {
+                                onStopRecording()
+                            } else {
+                                onStartRecording(adapterInput, cableInput)
+                            }
+                        },
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(12.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = if (isRecording) DangerRed else NeonGreen
+                        )
                     ) {
-                        Text(
-                            text = "Live Power:",
-                            fontSize = 13.sp,
-                            color = TextSecondary
+                        Icon(
+                            imageVector = if (isRecording) Icons.Default.Stop else Icons.Default.PlayArrow,
+                            contentDescription = null
                         )
-                        val formattedLiveWatts = if (powerStats.isCharging) {
-                            String.format(Locale.US, "%.1f W", powerStats.powerWatts)
-                        } else {
-                            String.format(Locale.US, "-%.1f W", powerStats.powerWatts)
-                        }
+                        Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = formattedLiveWatts,
-                            fontSize = 18.sp,
+                            text = if (isRecording) "STOP BENCHMARK TEST" else "START BENCHMARK TEST",
                             fontWeight = FontWeight.Bold,
-                            fontFamily = FontFamily.Monospace,
-                            color = if (powerStats.isCharging) NeonCyan else TextSecondary
+                            fontSize = 14.sp
                         )
+                    }
+
+                    if (isRecording) {
+                        Spacer(modifier = Modifier.height(12.dp))
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "Live Power:",
+                                fontSize = 13.sp,
+                                color = TextSecondary
+                            )
+                            val formattedLiveWatts = if (powerStats.isCharging) {
+                                String.format(Locale.US, "%.1f W", powerStats.powerWatts)
+                            } else {
+                                String.format(Locale.US, "-%.1f W", powerStats.powerWatts)
+                            }
+                            Text(
+                                text = formattedLiveWatts,
+                                fontSize = 18.sp,
+                                fontWeight = FontWeight.Bold,
+                                fontFamily = FontFamily.Monospace,
+                                color = if (powerStats.isCharging) NeonCyan else TextSecondary
+                            )
+                        }
                     }
                 }
             }
         }
 
-        Spacer(modifier = Modifier.height(20.dp))
+        // Saved Results Section Title
+        item {
+            Text(
+                text = "SAVED BENCHMARK RESULTS",
+                fontSize = 13.sp,
+                fontFamily = FontFamily.Monospace,
+                fontWeight = FontWeight.Bold,
+                color = TextSecondary
+            )
+        }
 
-        Text(
-            text = "SAVED BENCHMARK RESULTS",
-            fontSize = 13.sp,
-            fontFamily = FontFamily.Monospace,
-            fontWeight = FontWeight.Bold,
-            color = TextSecondary
-        )
-
-        Spacer(modifier = Modifier.height(12.dp))
-
+        // Saved Results List or Empty State
         if (sessions.isEmpty()) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = "No benchmark tests recorded yet.\nStart a test session above to compare performance!",
-                    fontSize = 13.sp,
-                    color = TextSecondary,
-                    textAlign = androidx.compose.ui.text.style.TextAlign.Center
-                )
-            }
-        } else {
-            LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                modifier = Modifier.weight(1f)
-            ) {
-                items(sessions, key = { it.id }) { session ->
-                    BenchmarkSessionCard(
-                        session = session,
-                        onDelete = { onDeleteSession(session.id) }
+            item {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "No benchmark tests recorded yet.\nStart a test session above to compare performance!",
+                        fontSize = 13.sp,
+                        color = TextSecondary,
+                        textAlign = androidx.compose.ui.text.style.TextAlign.Center
                     )
                 }
+            }
+        } else {
+            items(sessions, key = { it.id }) { session ->
+                BenchmarkSessionCard(
+                    session = session,
+                    onDelete = { onDeleteSession(session.id) }
+                )
             }
         }
     }
@@ -227,6 +253,7 @@ fun BenchmarkSessionCard(
     val startDateStr = if (session.startTimeMillis > 0) dateFormat.format(Date(session.startTimeMillis)) else "N/A"
     val endDateStr = if (session.endTimeMillis > 0) dateFormat.format(Date(session.endTimeMillis)) else "N/A"
     var showFullGraphDialog by remember { mutableStateOf(false) }
+    var touchedSample by remember { mutableStateOf<WattSample?>(null) }
 
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -275,6 +302,7 @@ fun BenchmarkSessionCard(
 
             Spacer(modifier = Modifier.height(12.dp))
 
+            // Metrics Row: Peak Watts | Avg Watts | Touched Point Watt (replaces Avg Volts)
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
@@ -285,7 +313,7 @@ fun BenchmarkSessionCard(
                         text = String.format(Locale.US, "%.1f W", session.peakWatts),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
-                        color = NeonAmber
+                        color = PeakGold
                     )
                 }
                 Column {
@@ -298,35 +326,41 @@ fun BenchmarkSessionCard(
                     )
                 }
                 Column {
-                    Text("AVG VOLTS", fontSize = 10.sp, fontFamily = FontFamily.Monospace, color = TextSecondary)
-                    Text(
-                        text = String.format(Locale.US, "%.2f V", session.avgVoltage),
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
+                    Text("POINT WATT", fontSize = 10.sp, fontFamily = FontFamily.Monospace, color = TextSecondary)
+                    val sample = touchedSample
+                    if (sample != null) {
+                        val textVal = if (sample.isCharging) {
+                            String.format(Locale.US, "%.1f W", sample.watt)
+                        } else {
+                            String.format(Locale.US, "-%.1f W", sample.watt)
+                        }
+                        val textColor = if (sample.isCharging) NeonCyan else NeonAmber
+                        Text(
+                            text = textVal,
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = textColor
+                        )
+                    } else {
+                        Text(
+                            text = "- -",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = TextSecondary
+                        )
+                    }
                 }
             }
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = "Duration: ${session.durationSeconds}s",
-                    fontSize = 11.sp,
-                    fontFamily = FontFamily.Monospace,
-                    color = TextSecondary
-                )
-                Text(
-                    text = "Battery: ${session.batteryLevelStart}% ➔ ${session.batteryLevelEnd}%",
-                    fontSize = 11.sp,
-                    fontFamily = FontFamily.Monospace,
-                    color = TextSecondary
-                )
-            }
+            // Duration display with formatted dk & sn
+            Text(
+                text = "Duration: ${formatDuration(session.durationSeconds)}",
+                fontSize = 11.sp,
+                fontFamily = FontFamily.Monospace,
+                color = TextSecondary
+            )
 
             // Watt vs Time Chart
             if (session.wattSamples.isNotEmpty()) {
@@ -356,8 +390,11 @@ fun BenchmarkSessionCard(
                 }
                 Spacer(modifier = Modifier.height(6.dp))
 
-                // Scrollable Chart
-                BenchmarkWattChart(samples = session.wattSamples)
+                // Scrollable Chart with Touch Point callback
+                BenchmarkWattChart(
+                    samples = session.wattSamples,
+                    onSampleSelected = { touchedSample = it }
+                )
             }
         }
     }
@@ -373,15 +410,17 @@ fun BenchmarkSessionCard(
 @Composable
 fun BenchmarkWattChart(
     samples: List<WattSample>,
+    onSampleSelected: ((WattSample) -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
     val scrollState = rememberScrollState()
-    val minStepPx = 16.dp
+    val minStepPx = 18.dp
+    val textMeasurer = rememberTextMeasurer()
 
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(110.dp)
+            .height(140.dp)
             .clip(RoundedCornerShape(10.dp))
             .background(MaterialTheme.colorScheme.surfaceVariant)
             .padding(8.dp)
@@ -412,32 +451,114 @@ fun BenchmarkWattChart(
                         modifier = Modifier
                             .fillMaxHeight()
                             .width(totalCalculatedWidth)
+                            .pointerInput(samples) {
+                                detectTapGestures(
+                                    onLongPress = { offset ->
+                                        val leftPaddingPx = 36.dp.toPx()
+                                        val rightPaddingPx = 12.dp.toPx()
+                                        val chartWidth = (size.width - leftPaddingPx - rightPaddingPx).coerceAtLeast(1f)
+                                        val stepX = chartWidth / (samples.size - 1).coerceAtLeast(1)
+
+                                        val touchX = (offset.x - leftPaddingPx).coerceIn(0f, chartWidth)
+                                        val idx = (touchX / stepX).toInt().coerceIn(0, samples.lastIndex)
+                                        onSampleSelected?.invoke(samples[idx])
+                                    },
+                                    onTap = { offset ->
+                                        val leftPaddingPx = 36.dp.toPx()
+                                        val rightPaddingPx = 12.dp.toPx()
+                                        val chartWidth = (size.width - leftPaddingPx - rightPaddingPx).coerceAtLeast(1f)
+                                        val stepX = chartWidth / (samples.size - 1).coerceAtLeast(1)
+
+                                        val touchX = (offset.x - leftPaddingPx).coerceIn(0f, chartWidth)
+                                        val idx = (touchX / stepX).toInt().coerceIn(0, samples.lastIndex)
+                                        onSampleSelected?.invoke(samples[idx])
+                                    }
+                                )
+                            }
                     ) {
+                        val leftPaddingPx = 36.dp.toPx()
+                        val bottomPaddingPx = 20.dp.toPx()
+                        val topPaddingPx = 12.dp.toPx()
+                        val rightPaddingPx = 12.dp.toPx()
+
+                        val chartWidth = size.width - leftPaddingPx - rightPaddingPx
+                        val chartHeight = size.height - topPaddingPx - bottomPaddingPx
+
                         val maxWatts = (samples.maxOfOrNull { it.watt } ?: 10.0).coerceAtLeast(5.0).toFloat()
                         val minWatts = 0.0f
-                        val stepX = size.width / (samples.size - 1).coerceAtLeast(1)
+                        val stepX = chartWidth / (samples.size - 1).coerceAtLeast(1)
 
                         val chargingColor = NeonCyan
                         val dischargingColor = NeonAmber
+                        val labelTextStyle = TextStyle(
+                            color = TextSecondary,
+                            fontSize = 9.sp,
+                            fontFamily = FontFamily.Monospace
+                        )
 
+                        // 1. Draw Y-Axis Labels & Horizontal Grid Lines
+                        val ySteps = 3
+                        for (j in 0..ySteps) {
+                            val ratio = j.toFloat() / ySteps
+                            val yPos = topPaddingPx + chartHeight * (1f - ratio)
+                            val wattVal = minWatts + (maxWatts - minWatts) * ratio
+
+                            // Horizontal dashed line
+                            drawLine(
+                                color = Color(0xFF475569),
+                                start = androidx.compose.ui.geometry.Offset(leftPaddingPx, yPos),
+                                end = androidx.compose.ui.geometry.Offset(size.width - rightPaddingPx, yPos),
+                                strokeWidth = 1.dp.toPx()
+                            )
+
+                            // Y Label
+                            val yLabelText = String.format(Locale.US, "%.0fW", wattVal)
+                            val textLayout = textMeasurer.measure(yLabelText, labelTextStyle)
+                            drawText(
+                                textLayoutResult = textLayout,
+                                topLeft = androidx.compose.ui.geometry.Offset(
+                                    x = leftPaddingPx - textLayout.size.width - 4.dp.toPx(),
+                                    y = yPos - textLayout.size.height / 2f
+                                )
+                            )
+                        }
+
+                        // 2. Draw X-Axis Time Ticks & Labels
+                        val timeStepInterval = (samples.size / 5).coerceAtLeast(1)
+                        for (i in 0 until samples.size step timeStepInterval) {
+                            val xPos = leftPaddingPx + i * stepX
+                            val timeLabel = formatDuration(i) // i represents sample index (~seconds)
+
+                            // X Label
+                            val textLayout = textMeasurer.measure(timeLabel, labelTextStyle)
+                            drawText(
+                                textLayoutResult = textLayout,
+                                topLeft = androidx.compose.ui.geometry.Offset(
+                                    x = (xPos - textLayout.size.width / 2f).coerceIn(leftPaddingPx, size.width - rightPaddingPx - textLayout.size.width),
+                                    y = size.height - bottomPaddingPx + 4.dp.toPx()
+                                )
+                            )
+                        }
+
+                        // 3. Draw Segment Line & Fills
                         for (i in 0 until samples.size - 1) {
                             val s1 = samples[i]
                             val s2 = samples[i + 1]
 
-                            val x1 = i * stepX
-                            val y1 = size.height - ((s1.watt.toFloat() - minWatts) / (maxWatts - minWatts) * size.height)
+                            val x1 = leftPaddingPx + i * stepX
+                            val y1 = topPaddingPx + chartHeight - ((s1.watt.toFloat() - minWatts) / (maxWatts - minWatts) * chartHeight)
 
-                            val x2 = (i + 1) * stepX
-                            val y2 = size.height - ((s2.watt.toFloat() - minWatts) / (maxWatts - minWatts) * size.height)
+                            val x2 = leftPaddingPx + (i + 1) * stepX
+                            val y2 = topPaddingPx + chartHeight - ((s2.watt.toFloat() - minWatts) / (maxWatts - minWatts) * chartHeight)
 
                             val segmentColor = if (s2.isCharging) chargingColor else dischargingColor
 
                             // Draw segment fill polygon under line
                             val fillPath = Path().apply {
-                                moveTo(x1, size.height)
+                                moveTo(x1, topPaddingPx + chartHeight)
                                 lineTo(x1, y1)
                                 lineTo(x2, y2)
-                                lineTo(x2, size.height)
+                                lineTo(x2, topPaddingPx + chartHeight)
                                 close()
                             }
                             drawPath(
@@ -466,6 +587,8 @@ fun FullGraphModalDialog(
     session: BenchmarkSession,
     onDismiss: () -> Unit
 ) {
+    var modalTouchedSample by remember { mutableStateOf<WattSample?>(null) }
+
     Dialog(
         onDismissRequest = onDismiss,
         properties = DialogProperties(usePlatformDefaultWidth = false)
@@ -511,7 +634,7 @@ fun FullGraphModalDialog(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(4.dp))
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -521,7 +644,7 @@ fun FullGraphModalDialog(
                         text = String.format(Locale.US, "Peak: %.1f W", session.peakWatts),
                         fontSize = 13.sp,
                         fontWeight = FontWeight.Bold,
-                        color = NeonAmber
+                        color = PeakGold
                     )
                     Text(
                         text = String.format(Locale.US, "Avg: %.1f W", session.avgWatts),
@@ -530,10 +653,27 @@ fun FullGraphModalDialog(
                         color = NeonGreen
                     )
                     Text(
-                        text = "${session.durationSeconds}s duration",
+                        text = formatDuration(session.durationSeconds),
                         fontSize = 13.sp,
                         fontFamily = FontFamily.Monospace,
                         color = TextSecondary
+                    )
+                }
+
+                if (modalTouchedSample != null) {
+                    Spacer(modifier = Modifier.height(8.dp))
+                    val sample = modalTouchedSample!!
+                    val textVal = if (sample.isCharging) {
+                        String.format(Locale.US, "Selected Point: %.1f W (Charging)", sample.watt)
+                    } else {
+                        String.format(Locale.US, "Selected Point: -%.1f W (Discharging)", sample.watt)
+                    }
+                    val textColor = if (sample.isCharging) NeonCyan else NeonAmber
+                    Text(
+                        text = textVal,
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = textColor
                     )
                 }
 
@@ -550,6 +690,7 @@ fun FullGraphModalDialog(
                 ) {
                     BenchmarkWattChart(
                         samples = session.wattSamples,
+                        onSampleSelected = { modalTouchedSample = it },
                         modifier = Modifier.fillMaxSize()
                     )
                 }
@@ -557,7 +698,7 @@ fun FullGraphModalDialog(
                 Spacer(modifier = Modifier.height(12.dp))
 
                 Text(
-                    text = "💡 Swipe left and right inside graph to scroll across test timeline.",
+                    text = "💡 Tap or long-press any point on graph to inspect exact Watt value.",
                     fontSize = 11.sp,
                     fontFamily = FontFamily.Monospace,
                     color = TextSecondary
