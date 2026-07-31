@@ -10,13 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.hobbycoding.wattbench.R
 import com.hobbycoding.wattbench.data.model.WattSample
 import com.hobbycoding.wattbench.ui.theme.NeonCyan
 import com.hobbycoding.wattbench.ui.theme.TextSecondary
@@ -45,7 +46,7 @@ fun PowerChart(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "REAL-TIME WATTAGE GRAPH (LAST 60S)",
+                    text = stringResource(R.string.chart_realtime_title),
                     fontSize = 11.sp,
                     fontFamily = FontFamily.Monospace,
                     fontWeight = FontWeight.Bold,
@@ -79,7 +80,7 @@ fun PowerChart(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = "Waiting for live data...",
+                            text = stringResource(R.string.chart_waiting_data),
                             fontSize = 12.sp,
                             color = TextSecondary
                         )

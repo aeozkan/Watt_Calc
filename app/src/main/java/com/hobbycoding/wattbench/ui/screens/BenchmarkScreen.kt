@@ -13,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Fullscreen
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Stop
 import androidx.compose.material3.*
@@ -24,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.font.FontFamily
@@ -33,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.hobbycoding.wattbench.R
 import com.hobbycoding.wattbench.data.model.BenchmarkSession
 import com.hobbycoding.wattbench.data.model.PowerStats
 import com.hobbycoding.wattbench.data.model.WattSample
@@ -46,13 +49,14 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+@Composable
 fun formatDuration(totalSeconds: Int): String {
     val minutes = totalSeconds / 60
     val seconds = totalSeconds % 60
     return when {
-        minutes > 0 && seconds > 0 -> "$minutes dk $seconds sn"
-        minutes > 0 -> "$minutes dk"
-        else -> "$seconds sn"
+        minutes > 0 && seconds > 0 -> stringResource(R.string.duration_min_sec, minutes, seconds)
+        minutes > 0 -> stringResource(R.string.duration_min, minutes)
+        else -> stringResource(R.string.duration_sec, seconds)
     }
 }
 
@@ -64,7 +68,8 @@ fun BenchmarkScreen(
     sessions: List<BenchmarkSession>,
     onStartRecording: (String, String) -> Unit,
     onStopRecording: () -> Unit,
-    onDeleteSession: (String) -> Unit
+    onDeleteSession: (String) -> Unit,
+    onOpenSettings: () -> Unit = {}
 ) {
     var adapterInput by remember { mutableStateOf("") }
     var cableInput by remember { mutableStateOf("") }
@@ -76,7 +81,7 @@ fun BenchmarkScreen(
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // Header Section
+        // Header Section with Top-Left Menu Button
         item {
             Row(
                 modifier = Modifier
@@ -84,9 +89,22 @@ fun BenchmarkScreen(
                     .height(48.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                IconButton(
+                    onClick = onOpenSettings,
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(MaterialTheme.colorScheme.surface)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Menu,
+                        contentDescription = "Menu",
+                        tint = NeonAmber
+                    )
+                }
+                Spacer(modifier = Modifier.width(12.dp))
                 Column {
                     Text(
-                        text = "CHARGER & CABLE BENCHMARK",
+                        text = stringResource(R.string.app_header_benchmark),
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Black,
                         fontFamily = FontFamily.Monospace,
@@ -94,7 +112,7 @@ fun BenchmarkScreen(
                         letterSpacing = 1.2.sp
                     )
                     Text(
-                        text = "Compare different charging bricks and USB cables",
+                        text = stringResource(R.string.subtitle_benchmark),
                         fontSize = 11.sp,
                         fontFamily = FontFamily.Monospace,
                         color = TextSecondary
@@ -112,7 +130,7 @@ fun BenchmarkScreen(
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(
-                        text = if (isRecording) "TEST IN PROGRESS (RECORDING BACKGROUND DATA)..." else "START NEW BENCHMARK RUN",
+                        text = if (isRecording) stringResource(R.string.benchmark_in_progress) else stringResource(R.string.benchmark_start_new),
                         fontSize = 12.sp,
                         fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.Bold,
@@ -124,7 +142,7 @@ fun BenchmarkScreen(
                     OutlinedTextField(
                         value = adapterInput,
                         onValueChange = { adapterInput = it },
-                        label = { Text("Charger / Adapter Name (e.g. Xiaomi 90W)") },
+                        label = { Text(stringResource(R.string.label_charger_adapter)) },
                         enabled = !isRecording,
                         modifier = Modifier.fillMaxWidth(),
                         colors = OutlinedTextFieldDefaults.colors(
@@ -138,7 +156,7 @@ fun BenchmarkScreen(
                     OutlinedTextField(
                         value = cableInput,
                         onValueChange = { cableInput = it },
-                        label = { Text("Cable Name (e.g. 6A Type-C Cable)") },
+                        label = { Text(stringResource(R.string.label_cable)) },
                         enabled = !isRecording,
                         modifier = Modifier.fillMaxWidth(),
                         colors = OutlinedTextFieldDefaults.colors(
@@ -169,7 +187,7 @@ fun BenchmarkScreen(
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = if (isRecording) "STOP BENCHMARK TEST" else "START BENCHMARK TEST",
+                            text = if (isRecording) stringResource(R.string.btn_stop_benchmark) else stringResource(R.string.btn_start_benchmark),
                             fontWeight = FontWeight.Bold,
                             fontSize = 14.sp
                         )
@@ -183,7 +201,7 @@ fun BenchmarkScreen(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = "Live Power:",
+                                text = stringResource(R.string.live_power_label),
                                 fontSize = 13.sp,
                                 color = TextSecondary
                             )
@@ -208,7 +226,7 @@ fun BenchmarkScreen(
         // Saved Results Section Title
         item {
             Text(
-                text = "SAVED BENCHMARK RESULTS",
+                text = stringResource(R.string.saved_results_title),
                 fontSize = 13.sp,
                 fontFamily = FontFamily.Monospace,
                 fontWeight = FontWeight.Bold,
@@ -226,7 +244,7 @@ fun BenchmarkScreen(
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = "No benchmark tests recorded yet.\nStart a test session above to compare performance!",
+                        text = stringResource(R.string.empty_benchmark_msg),
                         fontSize = 13.sp,
                         color = TextSecondary,
                         textAlign = androidx.compose.ui.text.style.TextAlign.Center
@@ -287,13 +305,13 @@ fun BenchmarkSessionCard(
             // Start / End Date Time Display
             Column {
                 Text(
-                    text = "Start: $startDateStr",
+                    text = stringResource(R.string.label_start, startDateStr),
                     fontSize = 11.sp,
                     fontFamily = FontFamily.Monospace,
                     color = TextSecondary
                 )
                 Text(
-                    text = "End:   $endDateStr",
+                    text = stringResource(R.string.label_end, endDateStr),
                     fontSize = 11.sp,
                     fontFamily = FontFamily.Monospace,
                     color = TextSecondary
@@ -308,7 +326,7 @@ fun BenchmarkSessionCard(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Column {
-                    Text("PEAK WATTS", fontSize = 10.sp, fontFamily = FontFamily.Monospace, color = TextSecondary)
+                    Text(stringResource(R.string.metric_peak_watts), fontSize = 10.sp, fontFamily = FontFamily.Monospace, color = TextSecondary)
                     Text(
                         text = String.format(Locale.US, "%.1f W", session.peakWatts),
                         fontSize = 16.sp,
@@ -317,7 +335,7 @@ fun BenchmarkSessionCard(
                     )
                 }
                 Column {
-                    Text("AVG WATTS", fontSize = 10.sp, fontFamily = FontFamily.Monospace, color = TextSecondary)
+                    Text(stringResource(R.string.metric_avg_watts), fontSize = 10.sp, fontFamily = FontFamily.Monospace, color = TextSecondary)
                     Text(
                         text = String.format(Locale.US, "%.1f W", session.avgWatts),
                         fontSize = 16.sp,
@@ -326,7 +344,7 @@ fun BenchmarkSessionCard(
                     )
                 }
                 Column {
-                    Text("POINT WATT", fontSize = 10.sp, fontFamily = FontFamily.Monospace, color = TextSecondary)
+                    Text(stringResource(R.string.metric_point_watt), fontSize = 10.sp, fontFamily = FontFamily.Monospace, color = TextSecondary)
                     val sample = touchedSample
                     if (sample != null) {
                         val textVal = if (sample.isCharging) {
@@ -356,7 +374,7 @@ fun BenchmarkSessionCard(
 
             // Duration display with formatted dk & sn
             Text(
-                text = "Duration: ${formatDuration(session.durationSeconds)}",
+                text = stringResource(R.string.label_duration, formatDuration(session.durationSeconds)),
                 fontSize = 11.sp,
                 fontFamily = FontFamily.Monospace,
                 color = TextSecondary
@@ -371,7 +389,7 @@ fun BenchmarkSessionCard(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "WATT - TIME GRAPH (${session.wattSamples.size} SAMPLES)",
+                        text = stringResource(R.string.chart_watt_time_graph, session.wattSamples.size),
                         fontSize = 10.sp,
                         fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.Bold,
@@ -416,6 +434,7 @@ fun BenchmarkWattChart(
     val scrollState = rememberScrollState()
     val minStepPx = 18.dp
     val textMeasurer = rememberTextMeasurer()
+    val notEnoughSamplesText = stringResource(R.string.chart_not_enough_samples)
 
     Box(
         modifier = modifier
@@ -431,7 +450,7 @@ fun BenchmarkWattChart(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Not enough samples",
+                    text = notEnoughSamplesText,
                     fontSize = 11.sp,
                     color = TextSecondary
                 )
@@ -454,6 +473,7 @@ fun BenchmarkWattChart(
                             .pointerInput(samples) {
                                 detectTapGestures(
                                     onLongPress = { offset ->
+                                        if (samples.isEmpty()) return@detectTapGestures
                                         val leftPaddingPx = 36.dp.toPx()
                                         val rightPaddingPx = 12.dp.toPx()
                                         val chartWidth = (size.width - leftPaddingPx - rightPaddingPx).coerceAtLeast(1f)
@@ -464,6 +484,7 @@ fun BenchmarkWattChart(
                                         onSampleSelected?.invoke(samples[idx])
                                     },
                                     onTap = { offset ->
+                                        if (samples.isEmpty()) return@detectTapGestures
                                         val leftPaddingPx = 36.dp.toPx()
                                         val rightPaddingPx = 12.dp.toPx()
                                         val chartWidth = (size.width - leftPaddingPx - rightPaddingPx).coerceAtLeast(1f)
@@ -511,7 +532,7 @@ fun BenchmarkWattChart(
                                 strokeWidth = 1.dp.toPx()
                             )
 
-                            // Y Label
+                            // Y Label (SI symbol W)
                             val yLabelText = String.format(Locale.US, "%.0fW", wattVal)
                             val textLayout = textMeasurer.measure(yLabelText, labelTextStyle)
                             drawText(
@@ -527,7 +548,9 @@ fun BenchmarkWattChart(
                         val timeStepInterval = (samples.size / 5).coerceAtLeast(1)
                         for (i in 0 until samples.size step timeStepInterval) {
                             val xPos = leftPaddingPx + i * stepX
-                            val timeLabel = formatDuration(i) // i represents sample index (~seconds)
+                            val minutes = i / 60
+                            val seconds = i % 60
+                            val timeLabel = if (minutes > 0) "${minutes}m ${seconds}s" else "${seconds}s"
 
                             // X Label
                             val textLayout = textMeasurer.measure(timeLabel, labelTextStyle)
@@ -619,7 +642,7 @@ fun FullGraphModalDialog(
                             color = NeonCyan
                         )
                         Text(
-                            text = "FULL DETAILED TIMELINE GRAPH",
+                            text = stringResource(R.string.chart_full_detailed_title),
                             fontSize = 11.sp,
                             fontFamily = FontFamily.Monospace,
                             color = TextSecondary
@@ -664,9 +687,9 @@ fun FullGraphModalDialog(
                     Spacer(modifier = Modifier.height(8.dp))
                     val sample = modalTouchedSample!!
                     val textVal = if (sample.isCharging) {
-                        String.format(Locale.US, "Selected Point: %.1f W (Charging)", sample.watt)
+                        String.format(Locale.US, "Selected Point: %.1f W", sample.watt)
                     } else {
-                        String.format(Locale.US, "Selected Point: -%.1f W (Discharging)", sample.watt)
+                        String.format(Locale.US, "Selected Point: -%.1f W", sample.watt)
                     }
                     val textColor = if (sample.isCharging) NeonCyan else NeonAmber
                     Text(
@@ -698,7 +721,7 @@ fun FullGraphModalDialog(
                 Spacer(modifier = Modifier.height(12.dp))
 
                 Text(
-                    text = "💡 Tap or long-press any point on graph to inspect exact Watt value.",
+                    text = stringResource(R.string.chart_modal_hint),
                     fontSize = 11.sp,
                     fontFamily = FontFamily.Monospace,
                     color = TextSecondary

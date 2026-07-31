@@ -1,0 +1,113 @@
+<resources>
+    <string name="app_name">WattBench</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_live">Canlı Telemetri</string>
+    <string name="tab_benchmark">Benchmark</string>
+
+    <!-- Headers -->
+    <string name="app_header_live">WATT HESAPLAYICI</string>
+    <string name="app_header_benchmark">ŞARJ CİHAZI &amp; KABLO TESTİ</string>
+    <string name="subtitle_benchmark">Farklı şarj adaptörlerini ve USB kablolarını karşılaştırın</string>
+
+    <!-- Statuses -->
+    <string name="status_disconnected">BAĞLANTI YOK</string>
+    <string name="status_charging_active">ŞARJ EDİLİYOR • %1$s</string>
+
+    <!-- Speed Categories -->
+    <string name="profile_header">ŞARJ PROFİLİ</string>
+    <string name="profile_ultra_hyper">Ultra HyperCharge (65W+)</string>
+    <string name="profile_super_turbo">Super Turbo Charge (33W+)</string>
+    <string name="profile_fast">Hızlı Şarj (18W+)</string>
+    <string name="profile_normal">Normal Şarj (7.5W+)</string>
+    <string name="profile_slow">Yavaş / Damlama Şarjı</string>
+    <string name="profile_not_charging">Şarj Edilmiyor</string>
+
+    <!-- Plug Types -->
+    <string name="plug_ac">AC Duvar Şarj Cihazı</string>
+    <string name="plug_usb">USB Portu</string>
+    <string name="plug_wireless">Kablosuz Şarj</string>
+    <string name="plug_connected">Bağlandı</string>
+    <string name="plug_disconnected">Bağlantı Kesildi</string>
+
+    <!-- Hero Gauge & Metric Cards -->
+    <string name="unit_watts_label">WATT</string>
+    <string name="metric_peak_power">ZİRVE GÜÇ</string>
+    <string name="metric_average_power">ORTALAMA GÜÇ</string>
+    <string name="metric_peak_watts">ZİRVE WATT</string>
+    <string name="metric_avg_watts">ORT. WATT</string>
+    <string name="metric_point_watt">NOKTA WATT</string>
+    <string name="metric_voltage">Voltaj</string>
+    <string name="metric_current">Akım</string>
+    <string name="metric_battery_level">Pil Seviyesi</string>
+    <string name="metric_temperature">Sıcaklık</string>
+
+    <!-- Charts -->
+    <string name="chart_realtime_title">CANLI WATT GRAFİĞİ (SON 60SN)</string>
+    <string name="chart_waiting_data">Canlı veri bekleniyor...</string>
+    <string name="chart_not_enough_samples">Yetersiz veri</string>
+    <string name="chart_watt_time_graph">WATT - ZAMAN GRAFİĞİ (%1$d ÖRNEK)</string>
+    <string name="chart_full_detailed_title">DETAYLI ZAMAN ÇİZELGESİ GRAFİĞİ</string>
+    <string name="chart_modal_hint">💡 Grafik üzerindeki herhangi bir noktaya dokunarak veya basılı tutarak anlık Watt değerini inceleyin.</string>
+
+    <!-- Benchmark Setup -->
+    <string name="benchmark_start_new">YENİ BENCHMARK TESTİ BAŞLAT</string>
+    <string name="benchmark_in_progress">TEST DEVAM EDİYOR (ARKA PLAN VERİSİ KAYDEDİLİYOR)...</string>
+    <string name="label_charger_adapter">Şarj Cihazı / Adaptör Adı (Örn: Xiaomi 90W)</string>
+    <string name="label_cable">Kablo Adı (Örn: 6A Type-C Kablo)</string>
+    <string name="btn_start_benchmark">BENCHMARK TESTİNİ BAŞLAT</string>
+    <string name="btn_stop_benchmark">BENCHMARK TESTİNİ DURDUR</string>
+    <string name="live_power_label">Canlı Güç:</string>
+    <string name="saved_results_title">KAYDEDİLEN BENCHMARK SONUÇLARI</string>
+    <string name="empty_benchmark_msg">Henüz kaydedilmiş bir benchmark testi yok.\nPerformansları karşılaştırmak için yukarıdan bir test başlatın!</string>
+    <string name="label_duration">Süre: %1$s</string>
+    <string name="label_start">Başlangıç: %1$s</string>
+    <string name="label_end">Bitiş:     %1$s</string>
+
+    <!-- Duration Formats -->
+    <string name="duration_min_sec">%1$d dk %2$d sn</string>
+    <string name="duration_min">%1$d dk</string>
+    <string name="duration_sec">%1$d sn</string>
+
+    <!-- Notification -->
+    <string name="notif_title_recording">⚡ Watt Benchmark Kaydediliyor</string>
+    <string name="notif_title_live">⚡ Canlı Watt Telemetrisi</string>
+    <string name="notif_charging">Şarj Ediliyor: %.1f W | %.2f V | %.0f mA</string>
+    <string name="notif_discharging">Deşarj Oluyor: %.1f W | Pil: %d%%</string>
+
+    <!-- Drawer Menu & Features -->
+    <string name="menu_title">Ayarlar &amp; Araçlar</string>
+    <string name="section_settings">AYARLAR &amp; TERCİHLER</string>
+    <string name="polling_rate_title">Ölçüm Sıklığı (Yenileme Aralığı)</string>
+    <string name="polling_500ms">Hızlı (500 ms)</string>
+    <string name="polling_1000ms">Standart (1 sn)</string>
+    <string name="polling_2000ms">Pil Tasarruflu (2 sn)</string>
+
+    <string name="section_battery_info">PİL &amp; CİHAZ BİLGİSİ</string>
+    <string name="battery_health_label">Pil Sağlığı</string>
+    <string name="battery_capacity_label">Fabrika Pil Kapasitesi</string>
+
+    <string name="health_good">İyi</string>
+    <string name="health_overheat">Aşırı Isınmış</string>
+    <string name="health_dead">Arızalı</string>
+    <string name="health_over_voltage">Yüksek Voltaj</string>
+    <string name="health_unspecified">Bilinmiyor</string>
+    <string name="health_cold">Soğuk</string>
+
+    <string name="section_export">VERİ DIŞA AKTARMA</string>
+    <string name="btn_export_csv">Test Sonuçlarını CSV Olarak Dışa Aktar</string>
+    <string name="msg_no_sessions_export">Dışa aktarılacak kaydedilmiş benchmark testi yok.</string>
+
+    <string name="section_about">HAKKINDA &amp; YASAL</string>
+    <string name="menu_privacy_policy">Gizlilik Politikası</string>
+    <string name="menu_rate_app">Uygulamayı Değerlendir</string>
+    <string name="menu_about">WattBench Hakkında</string>
+    <string name="app_version_info">WattBench v1.0.0 (Sürüm 1)</string>
+
+    <string name="privacy_dialog_title">Gizlilik Politikası</string>
+    <string name="privacy_dialog_body">WattBench gizliliğinize önem verir.\n\n• %100 Yerel İşleme: Tüm voltaj, akım ve Watt ölçümleri tamamen cihazınız üzerinde hesaplanır.\n• Kişisel Veri Toplanmaz: Hiçbir kişisel veri, konum veya cihaz kimliği herhangi bir sunucuya toplanmaz, saklanmaz veya gönderilmez.\n• Veri Dışa Aktarma: Dışa aktarılan CSV dosyaları yerel olarak üretilir ve yalnızca siz paylaşmayı seçtiğinizde geçici önbelleğe yazılır.</string>
+    <string name="dialog_close">Kapat</string>
+
+    <string name="about_dialog_title">WattBench Hakkında</string>
+    <string name="about_dialog_body">WattBench, yüksek hassasiyetli bir canlı telemetri ve şarj cihazı benchmark uygulamasıdır.\n\nTeknoloji meraklılarının canlı Watt, voltaj ve akım değerlerini ölçmesi, USB kablolarını ve şarj cihazlarını milisaniyelik hassasiyetle test etmesi için tasarlanmıştır.\n\nSürüm: 1.0.0</string>
+</resources>

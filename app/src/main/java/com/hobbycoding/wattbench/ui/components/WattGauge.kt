@@ -20,10 +20,12 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.hobbycoding.wattbench.R
 import com.hobbycoding.wattbench.ui.theme.NeonAmber
 import com.hobbycoding.wattbench.ui.theme.NeonCyan
 import com.hobbycoding.wattbench.ui.theme.NeonGreen
@@ -65,8 +67,7 @@ fun WattGauge(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box(
-                modifier = Modifier
-                    .size(200.dp),
+                modifier = Modifier.size(200.dp),
                 contentAlignment = Alignment.Center
             ) {
                 // Background & Foreground arc canvas
@@ -121,7 +122,7 @@ fun WattGauge(
                         )
                     }
                     Text(
-                        text = "WATTS",
+                        text = stringResource(R.string.unit_watts_label),
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily.Monospace,
@@ -140,7 +141,7 @@ fun WattGauge(
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
-                        text = "PEAK POWER",
+                        text = stringResource(R.string.metric_peak_power),
                         fontSize = 10.sp,
                         fontFamily = FontFamily.Monospace,
                         color = TextSecondary
@@ -160,7 +161,7 @@ fun WattGauge(
                 )
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
-                        text = "AVERAGE POWER",
+                        text = stringResource(R.string.metric_average_power),
                         fontSize = 10.sp,
                         fontFamily = FontFamily.Monospace,
                         color = TextSecondary

@@ -1,5 +1,9 @@
 [
     {
+        "merged": "com.hobbycoding.wattbench.app-debug-49:/xml_file_paths.xml.flat",
+        "source": "com.hobbycoding.wattbench.app-main-51:/xml/file_paths.xml"
+    },
+    {
         "merged": "com.hobbycoding.wattbench.app-debug-49:/mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "com.hobbycoding.wattbench.app-main-51:/mipmap-anydpi-v26/ic_launcher.xml"
     },

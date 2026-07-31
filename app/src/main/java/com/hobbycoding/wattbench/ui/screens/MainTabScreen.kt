@@ -8,7 +8,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.hobbycoding.wattbench.R
+import com.hobbycoding.wattbench.ui.components.SettingsBottomSheet
 import com.hobbycoding.wattbench.ui.theme.NeonCyan
 import com.hobbycoding.wattbench.ui.theme.TextSecondary
 import com.hobbycoding.wattbench.ui.viewmodel.WattViewModel
@@ -18,11 +21,13 @@ fun MainTabScreen(
     viewModel: WattViewModel = viewModel()
 ) {
     var selectedTab by rememberSaveable { mutableIntStateOf(0) }
+    var showSettingsSheet by remember { mutableStateOf(false) }
 
     val powerStats by viewModel.powerStats.collectAsState()
     val wattHistory by viewModel.wattHistory.collectAsState()
     val isRecordingBenchmark by viewModel.isRecordingBenchmark.collectAsState()
     val benchmarkSessions by viewModel.benchmarkSessions.collectAsState()
+    val pollingIntervalMs by viewModel.pollingIntervalMs.collectAsState()
 
     Scaffold(
         bottomBar = {
@@ -32,8 +37,8 @@ fun MainTabScreen(
                 NavigationBarItem(
                     selected = selectedTab == 0,
                     onClick = { selectedTab = 0 },
-                    icon = { Icon(Icons.Default.ElectricBolt, contentDescription = "Live Telemetry") },
-                    label = { Text("Live Telemetry") },
+                    icon = { Icon(Icons.Default.ElectricBolt, contentDescription = stringResource(R.string.tab_live)) },
+                    label = { Text(stringResource(R.string.tab_live)) },
                     colors = NavigationBarItemDefaults.colors(
                         selectedIconColor = NeonCyan,
                         selectedTextColor = NeonCyan,
@@ -45,8 +50,8 @@ fun MainTabScreen(
                 NavigationBarItem(
                     selected = selectedTab == 1,
                     onClick = { selectedTab = 1 },
-                    icon = { Icon(Icons.Default.Assessment, contentDescription = "Benchmark") },
-                    label = { Text("Benchmark") },
+                    icon = { Icon(Icons.Default.Assessment, contentDescription = stringResource(R.string.tab_benchmark)) },
+                    label = { Text(stringResource(R.string.tab_benchmark)) },
                     colors = NavigationBarItemDefaults.colors(
                         selectedIconColor = NeonCyan,
                         selectedTextColor = NeonCyan,
@@ -63,7 +68,8 @@ fun MainTabScreen(
                 0 -> HomeScreen(
                     powerStats = powerStats,
                     wattHistory = wattHistory,
-                    onResetStats = { viewModel.resetStats() }
+                    onResetStats = { viewModel.resetStats() },
+                    onOpenSettings = { showSettingsSheet = true }
                 )
                 1 -> BenchmarkScreen(
                     powerStats = powerStats,
@@ -71,9 +77,20 @@ fun MainTabScreen(
                     sessions = benchmarkSessions,
                     onStartRecording = { adapter, cable -> viewModel.startBenchmarkSession(adapter, cable) },
                     onStopRecording = { viewModel.stopBenchmarkSession() },
-                    onDeleteSession = { sessionId -> viewModel.deleteBenchmarkSession(sessionId) }
+                    onDeleteSession = { sessionId -> viewModel.deleteBenchmarkSession(sessionId) },
+                    onOpenSettings = { showSettingsSheet = true }
                 )
             }
+        }
+
+        if (showSettingsSheet) {
+            SettingsBottomSheet(
+                powerStats = powerStats,
+                currentPollingIntervalMs = pollingIntervalMs,
+                onPollingIntervalChanged = { viewModel.setPollingInterval(it) },
+                onExportCSV = { context -> viewModel.exportSessionsToCSV(context) },
+                onDismiss = { showSettingsSheet = false }
+            )
         }
     }
 }

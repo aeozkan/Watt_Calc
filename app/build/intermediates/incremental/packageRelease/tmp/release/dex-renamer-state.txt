@@ -1,4 +1,4 @@
-#Fri Jul 31 19:39:46 TRT 2026
+#Sat Aug 01 00:12:14 TRT 2026
 base.0=F\:\\Users\\aeozk\\AndroidStudioProjects\\Watt Calculator\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes.dex
 base.1=F\:\\Users\\aeozk\\AndroidStudioProjects\\Watt Calculator\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes2.dex
 path.0=classes.dex

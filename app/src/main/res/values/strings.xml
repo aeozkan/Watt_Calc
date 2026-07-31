@@ -1,3 +1,113 @@
 <resources>
-    <string name="app_name">Watt Calculator</string>
+    <string name="app_name">WattBench</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_live">Live Telemetry</string>
+    <string name="tab_benchmark">Benchmark</string>
+
+    <!-- Headers -->
+    <string name="app_header_live">WATT CALCULATOR</string>
+    <string name="app_header_benchmark">CHARGER &amp; CABLE BENCHMARK</string>
+    <string name="subtitle_benchmark">Compare different charging bricks and USB cables</string>
+
+    <!-- Statuses -->
+    <string name="status_disconnected">DISCONNECTED</string>
+    <string name="status_charging_active">CHARGING ACTIVE • %1$s</string>
+
+    <!-- Speed Categories -->
+    <string name="profile_header">CHARGING PROFILE</string>
+    <string name="profile_ultra_hyper">Ultra HyperCharge (65W+)</string>
+    <string name="profile_super_turbo">Super Turbo Charge (33W+)</string>
+    <string name="profile_fast">Fast Charge (18W+)</string>
+    <string name="profile_normal">Normal Charge (7.5W+)</string>
+    <string name="profile_slow">Slow / Trickle Charge</string>
+    <string name="profile_not_charging">Not Charging</string>
+
+    <!-- Plug Types -->
+    <string name="plug_ac">AC Wall Charger</string>
+    <string name="plug_usb">USB Port</string>
+    <string name="plug_wireless">Wireless Dock</string>
+    <string name="plug_connected">Connected</string>
+    <string name="plug_disconnected">Disconnected</string>
+
+    <!-- Hero Gauge & Metric Cards -->
+    <string name="unit_watts_label">WATTS</string>
+    <string name="metric_peak_power">PEAK POWER</string>
+    <string name="metric_average_power">AVERAGE POWER</string>
+    <string name="metric_peak_watts">PEAK WATTS</string>
+    <string name="metric_avg_watts">AVG WATTS</string>
+    <string name="metric_point_watt">POINT WATT</string>
+    <string name="metric_voltage">Voltage</string>
+    <string name="metric_current">Current</string>
+    <string name="metric_battery_level">Battery Level</string>
+    <string name="metric_temperature">Temperature</string>
+
+    <!-- Charts -->
+    <string name="chart_realtime_title">REAL-TIME WATTAGE GRAPH (LAST 60S)</string>
+    <string name="chart_waiting_data">Waiting for live data...</string>
+    <string name="chart_not_enough_samples">Not enough samples</string>
+    <string name="chart_watt_time_graph">WATT - TIME GRAPH (%1$d SAMPLES)</string>
+    <string name="chart_full_detailed_title">FULL DETAILED TIMELINE GRAPH</string>
+    <string name="chart_modal_hint">💡 Tap or long-press any point on graph to inspect exact Watt value.</string>
+
+    <!-- Benchmark Setup -->
+    <string name="benchmark_start_new">START NEW BENCHMARK RUN</string>
+    <string name="benchmark_in_progress">TEST IN PROGRESS (RECORDING BACKGROUND DATA)...</string>
+    <string name="label_charger_adapter">Charger / Adapter Name (e.g. Xiaomi 90W)</string>
+    <string name="label_cable">Cable Name (e.g. 6A Type-C Cable)</string>
+    <string name="btn_start_benchmark">START BENCHMARK TEST</string>
+    <string name="btn_stop_benchmark">STOP BENCHMARK TEST</string>
+    <string name="live_power_label">Live Power:</string>
+    <string name="saved_results_title">SAVED BENCHMARK RESULTS</string>
+    <string name="empty_benchmark_msg">No benchmark tests recorded yet.\nStart a test session above to compare performance!</string>
+    <string name="label_duration">Duration: %1$s</string>
+    <string name="label_start">Start: %1$s</string>
+    <string name="label_end">End:   %1$s</string>
+
+    <!-- Duration Formats -->
+    <string name="duration_min_sec">%1$d min %2$d sec</string>
+    <string name="duration_min">%1$d min</string>
+    <string name="duration_sec">%1$d sec</string>
+
+    <!-- Notification -->
+    <string name="notif_title_recording">⚡ Watt Benchmark Recording</string>
+    <string name="notif_title_live">⚡ Live Watt Telemetry</string>
+    <string name="notif_charging">Charging: %.1f W | %.2f V | %.0f mA</string>
+    <string name="notif_discharging">Discharging: %.1f W | Battery: %d%%</string>
+
+    <!-- Drawer Menu & Features -->
+    <string name="menu_title">Settings &amp; Tools</string>
+    <string name="section_settings">SETTINGS &amp; PREFERENCES</string>
+    <string name="polling_rate_title">Polling Rate (Refresh Interval)</string>
+    <string name="polling_500ms">Fast (500 ms)</string>
+    <string name="polling_1000ms">Standard (1 sec)</string>
+    <string name="polling_2000ms">Battery Saver (2 sec)</string>
+
+    <string name="section_battery_info">BATTERY &amp; DEVICE INFO</string>
+    <string name="battery_health_label">Battery Health</string>
+    <string name="battery_capacity_label">Design Capacity</string>
+
+    <string name="health_good">Good</string>
+    <string name="health_overheat">Overheating</string>
+    <string name="health_dead">Dead / Faulty</string>
+    <string name="health_over_voltage">Over Voltage</string>
+    <string name="health_unspecified">Unspecified / Unknown</string>
+    <string name="health_cold">Cold</string>
+
+    <string name="section_export">DATA EXPORT</string>
+    <string name="btn_export_csv">Export Benchmark Runs as CSV</string>
+    <string name="msg_no_sessions_export">No benchmark sessions recorded to export.</string>
+
+    <string name="section_about">ABOUT &amp; LEGAL</string>
+    <string name="menu_privacy_policy">Privacy Policy</string>
+    <string name="menu_rate_app">Rate App on Play Store</string>
+    <string name="menu_about">About WattBench</string>
+    <string name="app_version_info">WattBench v1.0.0 (Build 1)</string>
+
+    <string name="privacy_dialog_title">Privacy Policy</string>
+    <string name="privacy_dialog_body">WattBench respects your privacy.\n\n• 100% Local Processing: All voltage, current, and wattage measurements are calculated strictly on your device.\n• No Personal Data Collection: We do not collect, store, or transmit any personal data, location, or identifiers to any remote server.\n• File Export: Exported CSV files are generated locally and stored only in your device\'s temporary cache folder when you choose to share them.</string>
+    <string name="dialog_close">Close</string>
+
+    <string name="about_dialog_title">About WattBench</string>
+    <string name="about_dialog_body">WattBench is a modern, high-precision power telemetry and charger benchmark application.\n\nDesigned for technology enthusiasts to measure live wattage, voltage, current, and test USB cables &amp; chargers with sub-second accuracy.\n\nVersion: 1.0.0</string>
 </resources>

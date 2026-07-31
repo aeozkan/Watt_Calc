@@ -8,6 +8,10 @@
         "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-hdpi/ic_launcher_round.xml"
     },
     {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/xml_file_paths.xml.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/xml/file_paths.xml"
+    },
+    {
         "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-anydpi-v26/ic_launcher.xml"
     },

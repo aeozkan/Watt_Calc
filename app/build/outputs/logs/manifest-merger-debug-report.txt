@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:2:1-43:12
+ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:2:1-53:12
+INJECTED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:2:1-53:12
+INJECTED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:2:1-53:12
+INJECTED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:2:1-53:12
 MERGED from [androidx.compose.material3:material3-android:1.3.1] C:\Users\aeozk\.gradle\caches\8.9\transforms\d27fdd08da7072dd25b2ff560f1ea89b\transformed\material3-release\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] C:\Users\aeozk\.gradle\caches\8.9\transforms\560b022a16bb96896febffe9abec5d34\transformed\savedstate-ktx-1.2.1\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.compose.material:material-android:1.7.5] C:\Users\aeozk\.gradle\caches\8.9\transforms\23d9f1674c671b9058627e69f08cc9a9\transformed\material-release\AndroidManifest.xml:2:1-7:12
@@ -81,8 +81,8 @@ ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\And
 	android:name
 		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:8:22-65
 application
-ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:10:5-41:19
-INJECTED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:10:5-41:19
+ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:10:5-51:19
+INJECTED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:10:5-51:19
 MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\aeozk\.gradle\caches\8.9\transforms\f09335aa29b4a7102b728956a319c9af\transformed\emoji2-1.3.0\AndroidManifest.xml:23:5-33:19
 MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\aeozk\.gradle\caches\8.9\transforms\f09335aa29b4a7102b728956a319c9af\transformed\emoji2-1.3.0\AndroidManifest.xml:23:5-33:19
 MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\aeozk\.gradle\caches\8.9\transforms\e9ad1045356f1e570f389155e22183b7\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:23:5-33:19
@@ -135,28 +135,44 @@ ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\And
 		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:27:17-91
 	android:name
 		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:26:17-76
-activity#com.hobbycoding.wattbench.MainActivity
-ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:30:9-40:20
-	android:label
-		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:34:13-45
+provider#androidx.core.content.FileProvider
+ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:30:9-38:20
+	android:grantUriPermissions
+		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:34:13-47
+	android:authorities
+		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:32:13-73
 	android:exported
-		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:33:13-36
+		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:33:13-37
+	android:name
+		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:31:13-62
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:35:13-37:54
+	android:resource
+		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:37:17-51
+	android:name
+		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:36:17-67
+activity#com.hobbycoding.wattbench.MainActivity
+ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:40:9-50:20
+	android:label
+		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:44:13-45
+	android:exported
+		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:43:13-36
 	android:configChanges
-		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:32:13-91
+		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:42:13-91
 	android:theme
-		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:35:13-56
+		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:45:13-56
 	android:name
-		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:31:13-66
+		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:41:13-66
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:36:13-39:29
+ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:46:13-49:29
 action#android.intent.action.MAIN
-ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:37:17-69
+ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:47:17-69
 	android:name
-		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:37:25-66
+		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:47:25-66
 category#android.intent.category.LAUNCHER
-ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:38:17-77
+ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:48:17-77
 	android:name
-		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:38:27-74
+		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:48:27-74
 uses-sdk
 INJECTED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml

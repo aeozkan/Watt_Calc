@@ -2,6 +2,8 @@ package com.hobbycoding.wattbench.ui.viewmodel
 
 import android.app.Application
 import android.content.Context
+import android.content.Intent
+import androidx.core.content.FileProvider
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.hobbycoding.wattbench.data.model.BenchmarkSession
@@ -9,12 +11,18 @@ import com.hobbycoding.wattbench.data.model.PowerStats
 import com.hobbycoding.wattbench.data.model.WattSample
 import com.hobbycoding.wattbench.data.repository.BatteryRepository
 import com.hobbycoding.wattbench.service.PowerTelemetryService
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONObject
+import java.io.File
+import java.io.FileWriter
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class WattViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -32,13 +40,24 @@ class WattViewModel(application: Application) : AndroidViewModel(application) {
     private val _isRecordingBenchmark = MutableStateFlow(false)
     val isRecordingBenchmark: StateFlow<Boolean> = _isRecordingBenchmark.asStateFlow()
 
+    private val _pollingIntervalMs = MutableStateFlow(1000L)
+    val pollingIntervalMs: StateFlow<Long> = _pollingIntervalMs.asStateFlow()
+
     private var currentBenchmarkAdapter = ""
     private var currentBenchmarkCable = ""
+    private var telemetryJob: Job? = null
 
     init {
         _benchmarkSessions.value = loadSessionsFromDisk()
         startTelemetryLoop()
         observeServiceLiveStats()
+    }
+
+    fun setPollingInterval(intervalMs: Long) {
+        if (_pollingIntervalMs.value != intervalMs) {
+            _pollingIntervalMs.value = intervalMs
+            startTelemetryLoop()
+        }
     }
 
     private fun observeServiceLiveStats() {
@@ -52,8 +71,9 @@ class WattViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun startTelemetryLoop() {
-        viewModelScope.launch {
-            repository.getPowerStatsFlow(1000L).collect { stats ->
+        telemetryJob?.cancel()
+        telemetryJob = viewModelScope.launch {
+            repository.getPowerStatsFlow(_pollingIntervalMs.value).collect { stats ->
                 if (!PowerTelemetryService.isServiceRunning.value) {
                     _powerStats.value = stats
                 }
@@ -136,6 +156,47 @@ class WattViewModel(application: Application) : AndroidViewModel(application) {
         val updatedList = _benchmarkSessions.value.filter { it.id != sessionId }
         _benchmarkSessions.value = updatedList
         saveSessionsToDisk(updatedList)
+    }
+
+    fun exportSessionsToCSV(context: Context): Boolean {
+        val sessions = _benchmarkSessions.value
+        if (sessions.isEmpty()) return false
+
+        try {
+            val fileName = "WattBench_Benchmark_Results_${System.currentTimeMillis()}.csv"
+            val cacheFile = File(context.cacheDir, fileName)
+
+            FileWriter(cacheFile).use { writer ->
+                writer.append("ID,Title,Adapter,Cable,Duration(sec),Peak Watts,Avg Watts,Avg Voltage(V),Avg Current(A),Start Battery%,End Battery%,Start Time,End Time\n")
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+                for (s in sessions) {
+                    val startStr = if (s.startTimeMillis > 0) dateFormat.format(Date(s.startTimeMillis)) else ""
+                    val endStr = if (s.endTimeMillis > 0) dateFormat.format(Date(s.endTimeMillis)) else ""
+                    writer.append("\"${s.id}\",\"${s.title}\",\"${s.adapterName}\",\"${s.cableName}\",${s.durationSeconds},${s.peakWatts},${s.avgWatts},${s.avgVoltage},${s.avgAmperes},${s.batteryLevelStart},${s.batteryLevelEnd},\"$startStr\",\"$endStr\"\n")
+                }
+            }
+
+            val uri = FileProvider.getUriForFile(
+                context,
+                "${context.packageName}.fileprovider",
+                cacheFile
+            )
+
+            val intent = Intent(Intent.ACTION_SEND).apply {
+                type = "text/csv"
+                putExtra(Intent.EXTRA_STREAM, uri)
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+            val chooser = Intent.createChooser(intent, "Export Benchmark CSV").apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+            context.startActivity(chooser)
+            return true
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return false
+        }
     }
 
     private fun saveSessionsToDisk(sessions: List<BenchmarkSession>) {

@@ -9,6 +9,7 @@ import android.os.IBinder
 import android.os.PowerManager
 import androidx.core.app.NotificationCompat
 import com.hobbycoding.wattbench.MainActivity
+import com.hobbycoding.wattbench.R
 import com.hobbycoding.wattbench.data.model.PowerStats
 import com.hobbycoding.wattbench.data.model.WattSample
 import com.hobbycoding.wattbench.data.repository.BatteryRepository
@@ -122,9 +123,9 @@ class PowerTelemetryService : Service() {
 
     private fun updateNotification(stats: PowerStats) {
         val contentText = if (stats.isCharging) {
-            String.format(Locale.US, "Charging: %.1f W | %.2f V | %.0f mA", stats.powerWatts, stats.voltageVolts, stats.currentMilliAmperes)
+            getString(R.string.notif_charging, stats.powerWatts, stats.voltageVolts, stats.currentMilliAmperes)
         } else {
-            String.format(Locale.US, "Discharging: %.1f W | Battery: %d%%", stats.powerWatts, stats.batteryLevel)
+            getString(R.string.notif_discharging, stats.powerWatts, stats.batteryLevel)
         }
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(NOTIFICATION_ID, buildNotification(contentText))
@@ -138,8 +139,10 @@ class PowerTelemetryService : Service() {
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
 
+        val title = if (isRecordingBenchmark) getString(R.string.notif_title_recording) else getString(R.string.notif_title_live)
+
         return NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle(if (isRecordingBenchmark) "⚡ Watt Benchmark Recording" else "⚡ Live Watt Telemetry")
+            .setContentTitle(title)
             .setContentText(text)
             .setSmallIcon(android.R.drawable.ic_dialog_info)
             .setContentIntent(pendingIntent)

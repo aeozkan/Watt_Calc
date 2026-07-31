@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
+import com.hobbycoding.wattbench.R
 import com.hobbycoding.wattbench.data.model.PowerStats
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -51,11 +52,23 @@ class BatteryRepository(private val context: Context) {
 
         val plugged = batteryStatus?.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) ?: -1
         val plugType = when (plugged) {
-            BatteryManager.BATTERY_PLUGGED_AC -> "AC Wall Charger"
-            BatteryManager.BATTERY_PLUGGED_USB -> "USB Port"
-            BatteryManager.BATTERY_PLUGGED_WIRELESS -> "Wireless Dock"
-            else -> if (isCharging) "Connected" else "Disconnected"
+            BatteryManager.BATTERY_PLUGGED_AC -> context.getString(R.string.plug_ac)
+            BatteryManager.BATTERY_PLUGGED_USB -> context.getString(R.string.plug_usb)
+            BatteryManager.BATTERY_PLUGGED_WIRELESS -> context.getString(R.string.plug_wireless)
+            else -> if (isCharging) context.getString(R.string.plug_connected) else context.getString(R.string.plug_disconnected)
         }
+
+        val healthInt = batteryStatus?.getIntExtra(BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_UNKNOWN) ?: BatteryManager.BATTERY_HEALTH_UNKNOWN
+        val healthStr = when (healthInt) {
+            BatteryManager.BATTERY_HEALTH_GOOD -> context.getString(R.string.health_good)
+            BatteryManager.BATTERY_HEALTH_OVERHEAT -> context.getString(R.string.health_overheat)
+            BatteryManager.BATTERY_HEALTH_DEAD -> context.getString(R.string.health_dead)
+            BatteryManager.BATTERY_HEALTH_OVER_VOLTAGE -> context.getString(R.string.health_over_voltage)
+            BatteryManager.BATTERY_HEALTH_COLD -> context.getString(R.string.health_cold)
+            else -> context.getString(R.string.health_unspecified)
+        }
+
+        val batteryCapacityMah = getBatteryCapacityMah()
 
         // Fetch current from BatteryManager property
         val rawCurrentNow = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW)
@@ -92,11 +105,14 @@ class BatteryRepository(private val context: Context) {
             chargingSpeedCategory = speedCategory,
             peakPowerWatts = peakWatts,
             averagePowerWatts = avgWatts,
+            batteryHealth = healthStr,
+            batteryCapacityMah = batteryCapacityMah,
             timestamp = System.currentTimeMillis()
         )
     }
 
     private fun parseCurrentToAmperes(rawCurrent: Int, isCharging: Boolean): Double {
+        if (rawCurrent == Int.MIN_VALUE) return 0.0
         val absVal = abs(rawCurrent).toDouble()
         if (absVal == 0.0) return 0.0
 
@@ -109,13 +125,24 @@ class BatteryRepository(private val context: Context) {
     }
 
     private fun getChargingSpeedCategory(watts: Double, isCharging: Boolean): String {
-        if (!isCharging) return "Not Charging"
+        if (!isCharging) return context.getString(R.string.profile_not_charging)
         return when {
-            watts >= 65.0 -> "Ultra HyperCharge (65W+)"
-            watts >= 33.0 -> "Super Turbo Charge (33W+)"
-            watts >= 18.0 -> "Fast Charge (18W+)"
-            watts >= 7.5 -> "Normal Charge (7.5W+)"
-            else -> "Slow / Trickle Charge"
+            watts >= 65.0 -> context.getString(R.string.profile_ultra_hyper)
+            watts >= 33.0 -> context.getString(R.string.profile_super_turbo)
+            watts >= 18.0 -> context.getString(R.string.profile_fast)
+            watts >= 7.5 -> context.getString(R.string.profile_normal)
+            else -> context.getString(R.string.profile_slow)
+        }
+    }
+
+    private fun getBatteryCapacityMah(): Int {
+        return try {
+            val powerProfileClass = Class.forName("com.android.internal.os.PowerProfile")
+            val powerProfile = powerProfileClass.getConstructor(Context::class.java).newInstance(context)
+            val capacity = powerProfileClass.getMethod("getBatteryCapacity").invoke(powerProfile) as Double
+            capacity.toInt()
+        } catch (e: Exception) {
+            0
         }
     }
 }

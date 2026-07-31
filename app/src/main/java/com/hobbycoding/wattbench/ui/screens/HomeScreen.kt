@@ -8,6 +8,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BatteryChargingFull
 import androidx.compose.material.icons.filled.ElectricBolt
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Speed
 import androidx.compose.material.icons.filled.Thermostat
@@ -17,10 +18,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.hobbycoding.wattbench.R
 import com.hobbycoding.wattbench.data.model.PowerStats
 import com.hobbycoding.wattbench.data.model.WattSample
 import com.hobbycoding.wattbench.ui.components.MetricCard
@@ -37,7 +40,8 @@ import java.util.Locale
 fun HomeScreen(
     powerStats: PowerStats,
     wattHistory: List<WattSample>,
-    onResetStats: () -> Unit
+    onResetStats: () -> Unit,
+    onOpenSettings: () -> Unit
 ) {
     val scrollState = rememberScrollState()
 
@@ -48,7 +52,7 @@ fun HomeScreen(
             .verticalScroll(scrollState)
             .padding(16.dp)
     ) {
-        // App Header
+        // App Header with Top-Left Menu Button
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -56,21 +60,40 @@ fun HomeScreen(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column {
-                Text(
-                    text = "WATT CALCULATOR",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Black,
-                    fontFamily = FontFamily.Monospace,
-                    color = NeonCyan,
-                    letterSpacing = 1.2.sp
-                )
-                Text(
-                    text = if (powerStats.isCharging) "CHARGING ACTIVE • ${powerStats.chargePlugType.uppercase()}" else "DISCONNECTED",
-                    fontSize = 11.sp,
-                    fontFamily = FontFamily.Monospace,
-                    color = if (powerStats.isCharging) NeonGreen else TextSecondary
-                )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                IconButton(
+                    onClick = onOpenSettings,
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(MaterialTheme.colorScheme.surface)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Menu,
+                        contentDescription = "Menu",
+                        tint = NeonCyan
+                    )
+                }
+                Spacer(modifier = Modifier.width(12.dp))
+                Column {
+                    Text(
+                        text = stringResource(R.string.app_header_live),
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Black,
+                        fontFamily = FontFamily.Monospace,
+                        color = NeonCyan,
+                        letterSpacing = 1.2.sp
+                    )
+                    Text(
+                        text = if (powerStats.isCharging) {
+                            stringResource(R.string.status_charging_active, powerStats.chargePlugType.uppercase())
+                        } else {
+                            stringResource(R.string.status_disconnected)
+                        },
+                        fontSize = 11.sp,
+                        fontFamily = FontFamily.Monospace,
+                        color = if (powerStats.isCharging) NeonGreen else TextSecondary
+                    )
+                }
             }
             IconButton(
                 onClick = onResetStats,
@@ -103,7 +126,7 @@ fun HomeScreen(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = "CHARGING PROFILE",
+                        text = stringResource(R.string.profile_header),
                         fontSize = 11.sp,
                         fontFamily = FontFamily.Monospace,
                         color = TextSecondary
@@ -135,7 +158,7 @@ fun HomeScreen(
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             MetricCard(
-                title = "Voltage",
+                title = stringResource(R.string.metric_voltage),
                 value = String.format(Locale.US, "%.2f", powerStats.voltageVolts),
                 unit = "V",
                 icon = Icons.Default.ElectricBolt,
@@ -143,7 +166,7 @@ fun HomeScreen(
                 modifier = Modifier.weight(1f)
             )
             MetricCard(
-                title = "Current",
+                title = stringResource(R.string.metric_current),
                 value = String.format(Locale.US, "%.0f", powerStats.currentMilliAmperes),
                 unit = "mA",
                 icon = Icons.Default.Speed,
@@ -159,7 +182,7 @@ fun HomeScreen(
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             MetricCard(
-                title = "Battery Level",
+                title = stringResource(R.string.metric_battery_level),
                 value = "${powerStats.batteryLevel}",
                 unit = "%",
                 icon = Icons.Default.BatteryChargingFull,
@@ -167,7 +190,7 @@ fun HomeScreen(
                 modifier = Modifier.weight(1f)
             )
             MetricCard(
-                title = "Temperature",
+                title = stringResource(R.string.metric_temperature),
                 value = String.format(Locale.US, "%.1f", powerStats.temperatureCelsius),
                 unit = "°C",
                 icon = Icons.Default.Thermostat,
