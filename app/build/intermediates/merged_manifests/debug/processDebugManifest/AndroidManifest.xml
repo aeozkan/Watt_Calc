@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.wattcalculator"
+    package="com.hobbycoding.wattbench"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -15,10 +15,10 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <permission
-        android:name="com.example.wattcalculator.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:name="com.hobbycoding.wattbench.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.example.wattcalculator.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+    <uses-permission android:name="com.hobbycoding.wattbench.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 
     <application
         android:allowBackup="true"
@@ -34,7 +34,7 @@
         android:testOnly="true"
         android:theme="@style/Theme.WattCalculator" >
         <service
-            android:name="com.example.wattcalculator.service.PowerTelemetryService"
+            android:name="com.hobbycoding.wattbench.service.PowerTelemetryService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="specialUse" >
@@ -44,7 +44,7 @@
         </service>
 
         <activity
-            android:name="com.example.wattcalculator.MainActivity"
+            android:name="com.hobbycoding.wattbench.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.WattCalculator" >
@@ -57,7 +57,7 @@
 
         <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="com.example.wattcalculator.androidx-startup"
+            android:authorities="com.hobbycoding.wattbench.androidx-startup"
             android:exported="false" >
             <meta-data
                 android:name="androidx.emoji2.text.EmojiCompatInitializer"

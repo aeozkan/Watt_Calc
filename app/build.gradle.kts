@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.wattcalculator"
+    namespace = "com.hobbycoding.wattbench"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.wattcalculator"
+        applicationId = "com.hobbycoding.wattbench"
         minSdk = 26
         targetSdk = 35
         versionCode = 1

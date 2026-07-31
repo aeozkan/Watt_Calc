@@ -1,4 +1,4 @@
-com.example.wattcalculator
+com.hobbycoding.wattbench
 attr alpha
 attr font
 attr fontProviderAuthority

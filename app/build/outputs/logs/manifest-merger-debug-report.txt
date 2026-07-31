@@ -119,7 +119,7 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\ae
 		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:18:9-52
 	android:dataExtractionRules
 		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:12:9-65
-service#com.example.wattcalculator.service.PowerTelemetryService
+service#com.hobbycoding.wattbench.service.PowerTelemetryService
 ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:20:9-28:19
 	android:enabled
 		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:22:13-35
@@ -128,14 +128,14 @@ ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\And
 	android:foregroundServiceType
 		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:24:13-55
 	android:name
-		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:21:13-58
+		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:21:13-83
 property#android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE
 ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:25:13-27:94
 	android:value
 		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:27:17-91
 	android:name
 		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:26:17-76
-activity#com.example.wattcalculator.MainActivity
+activity#com.hobbycoding.wattbench.MainActivity
 ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:30:9-39:20
 	android:label
 		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:33:13-45
@@ -144,7 +144,7 @@ ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\And
 	android:theme
 		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:34:13-56
 	android:name
-		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:31:13-41
+		ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:31:13-66
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from F:\Users\aeozk\AndroidStudioProjects\Watt Calculator\app\src\main\AndroidManifest.xml:35:13-38:29
 action#android.intent.action.MAIN
@@ -305,7 +305,7 @@ ADDED from [androidx.core:core:1.15.0] C:\Users\aeozk\.gradle\caches\8.9\transfo
 		ADDED from [androidx.core:core:1.15.0] C:\Users\aeozk\.gradle\caches\8.9\transforms\d89dedd33f891a13e8a04b79d7e19015\transformed\core-1.15.0\AndroidManifest.xml:24:9-44
 	android:name
 		ADDED from [androidx.core:core:1.15.0] C:\Users\aeozk\.gradle\caches\8.9\transforms\d89dedd33f891a13e8a04b79d7e19015\transformed\core-1.15.0\AndroidManifest.xml:23:9-81
-permission#com.example.wattcalculator.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+permission#com.hobbycoding.wattbench.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.15.0] C:\Users\aeozk\.gradle\caches\8.9\transforms\d89dedd33f891a13e8a04b79d7e19015\transformed\core-1.15.0\AndroidManifest.xml:22:5-24:47
 	android:protectionLevel
 		ADDED from [androidx.core:core:1.15.0] C:\Users\aeozk\.gradle\caches\8.9\transforms\d89dedd33f891a13e8a04b79d7e19015\transformed\core-1.15.0\AndroidManifest.xml:24:9-44
@@ -315,7 +315,7 @@ uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.15.0] C:\Users\aeozk\.gradle\caches\8.9\transforms\d89dedd33f891a13e8a04b79d7e19015\transformed\core-1.15.0\AndroidManifest.xml:26:5-97
 	android:name
 		ADDED from [androidx.core:core:1.15.0] C:\Users\aeozk\.gradle\caches\8.9\transforms\d89dedd33f891a13e8a04b79d7e19015\transformed\core-1.15.0\AndroidManifest.xml:26:22-94
-uses-permission#com.example.wattcalculator.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+uses-permission#com.hobbycoding.wattbench.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.15.0] C:\Users\aeozk\.gradle\caches\8.9\transforms\d89dedd33f891a13e8a04b79d7e19015\transformed\core-1.15.0\AndroidManifest.xml:26:5-97
 	android:name
 		ADDED from [androidx.core:core:1.15.0] C:\Users\aeozk\.gradle\caches\8.9\transforms\d89dedd33f891a13e8a04b79d7e19015\transformed\core-1.15.0\AndroidManifest.xml:26:22-94

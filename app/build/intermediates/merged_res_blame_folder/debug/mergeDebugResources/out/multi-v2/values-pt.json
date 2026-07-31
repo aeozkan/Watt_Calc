@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.wattcalculator.app-mergeDebugResources-47:/values-pt/values-pt.xml",
+            "outputFile": "com.hobbycoding.wattbench.app-mergeDebugResources-47:/values-pt/values-pt.xml",
             "map": [
                 {
                     "source": "C:\\Users\\aeozk\\.gradle\\caches\\8.9\\transforms\\6f80d4d9c1dda326593c90fa6eb192db\\transformed\\ui-release\\res\\values-pt\\values-pt.xml",
