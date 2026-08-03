@@ -20,7 +20,7 @@
     <string name="profile_super_turbo">Super Turbo Charge (33W+)</string>
     <string name="profile_fast">Hızlı Şarj (18W+)</string>
     <string name="profile_normal">Normal Şarj (7.5W+)</string>
-    <string name="profile_slow">Yavaş / Damlama Şarjı</string>
+    <string name="profile_slow">Yavaş Şarj</string>
     <string name="profile_not_charging">Şarj Edilmiyor</string>
 
     <!-- Plug Types -->
@@ -110,4 +110,13 @@
 
     <string name="about_dialog_title">WattBench Hakkında</string>
     <string name="about_dialog_body">WattBench, yüksek hassasiyetli bir canlı telemetri ve şarj cihazı benchmark uygulamasıdır.\n\nTeknoloji meraklılarının canlı Watt, voltaj ve akım değerlerini ölçmesi, USB kablolarını ve şarj cihazlarını milisaniyelik hassasiyetle test etmesi için tasarlanmıştır.\n\nSürüm: 1.0.0</string>
+
+    <!-- Welcome & Tips Dialog -->
+    <string name="tips_dialog_title">💡 En İyi Sonuçlar İçin İpuçları</string>
+    <string name="tips_item_1_title">1. Ekran Kapalıyken Test Edin</string>
+    <string name="tips_item_1_body">Ekranın güç tüketimi olmadan en doğru Watt değerini ölçmek için test sırasında telefon ekranınızı kilitleyin. Telemetri arka planda kaydetmeye devam edecektir.</string>
+    <string name="tips_item_2_title">2. Şarj Cihazı ve Kabloları Karşılaştırın</string>
+    <string name="tips_item_2_body">Farklı duvar adaptörlerini ve USB Type-C kablolarını kaydetmek ve performanslarını karşılaştırmak için Benchmark sekmesini kullanın.</string>
+    <string name="tips_dont_show_again">Bunu bir daha gösterme</string>
+    <string name="btn_got_it">Anladım!</string>
 </resources>

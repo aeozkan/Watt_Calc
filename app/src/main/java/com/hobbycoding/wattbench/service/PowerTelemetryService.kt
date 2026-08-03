@@ -25,6 +25,7 @@ class PowerTelemetryService : Service() {
     private val serviceScope = CoroutineScope(Dispatchers.Default + Job())
     private lateinit var batteryRepository: BatteryRepository
     private var wakeLock: PowerManager.WakeLock? = null
+    private lateinit var powerManager: PowerManager
 
     companion object {
         const val CHANNEL_ID = "watt_telemetry_channel"
@@ -79,7 +80,7 @@ class PowerTelemetryService : Service() {
         batteryRepository = BatteryRepository(this)
         createNotificationChannel()
 
-        val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+        powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
         wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "WattCalculator::TelemetryWakeLock")
         wakeLock?.acquire(60 * 60 * 1000L) // 1 hour max timeout
     }
@@ -108,9 +109,17 @@ class PowerTelemetryService : Service() {
             while (isActive) {
                 val stats = batteryRepository.fetchCurrentPowerStats()
                 _liveStats.value = stats
+                val isScreenInteractive = powerManager.isInteractive
 
                 if (isRecordingBenchmark) {
-                    _benchmarkWattSamples.add(WattSample(stats.powerWatts, stats.isCharging))
+                    _benchmarkWattSamples.add(
+                        WattSample(
+                            watt = stats.powerWatts,
+                            isCharging = stats.isCharging,
+                            batteryLevel = stats.batteryLevel,
+                            isScreenOn = isScreenInteractive
+                        )
+                    )
                     _benchmarkVoltSamples.add(stats.voltageVolts)
                     _benchmarkAmpSamples.add(stats.currentAmperes)
                 }

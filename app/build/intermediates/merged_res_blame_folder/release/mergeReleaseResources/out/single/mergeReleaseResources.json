@@ -1,0 +1,98 @@
+[
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-xxxhdpi_ic_launcher_icon_foreground.webp.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-xxxhdpi/ic_launcher_icon_foreground.webp"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-hdpi_ic_launcher_icon.webp.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-hdpi/ic_launcher_icon.webp"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-xxhdpi_ic_launcher_icon.webp.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-xxhdpi/ic_launcher_icon.webp"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-xxxhdpi_ic_launcher_icon_round.webp.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-xxxhdpi/ic_launcher_icon_round.webp"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-xhdpi_ic_launcher_icon_round.webp.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-xhdpi/ic_launcher_icon_round.webp"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-xxhdpi_ic_launcher_icon_foreground.webp.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-xxhdpi/ic_launcher_icon_foreground.webp"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-xhdpi_ic_launcher_icon_foreground.webp.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-xhdpi/ic_launcher_icon_foreground.webp"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-anydpi-v26_ic_launcher_icon.xml.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-anydpi-v26/ic_launcher_icon.xml"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/xml_file_paths.xml.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/xml/file_paths.xml"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-anydpi-v26_ic_launcher_icon_round.xml.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-anydpi-v26/ic_launcher_icon_round.xml"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/xml_backup_rules.xml.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-xxxhdpi_ic_launcher_icon.webp.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-xxxhdpi/ic_launcher_icon.webp"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-mdpi_ic_launcher_icon_foreground.webp.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-mdpi/ic_launcher_icon_foreground.webp"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/xml_data_extraction_rules.xml.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-hdpi_ic_launcher_icon_round.webp.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-hdpi/ic_launcher_icon_round.webp"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-hdpi_ic_launcher_icon_foreground.webp.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-hdpi/ic_launcher_icon_foreground.webp"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-mdpi_ic_launcher_icon_round.webp.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-mdpi/ic_launcher_icon_round.webp"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-xxhdpi_ic_launcher_icon_round.webp.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-xxhdpi/ic_launcher_icon_round.webp"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-mdpi_ic_launcher_icon.webp.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-mdpi/ic_launcher_icon.webp"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/drawable_ic_launcher_icon_background.xml.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/drawable/ic_launcher_icon_background.xml"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/drawable_ic_launcher_icon_foreground.xml.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/drawable/ic_launcher_icon_foreground.xml"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-xhdpi_ic_launcher_icon.webp.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-xhdpi/ic_launcher_icon.webp"
+    }
+]

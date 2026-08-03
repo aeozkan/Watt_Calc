@@ -43,14 +43,32 @@ class WattViewModel(application: Application) : AndroidViewModel(application) {
     private val _pollingIntervalMs = MutableStateFlow(1000L)
     val pollingIntervalMs: StateFlow<Long> = _pollingIntervalMs.asStateFlow()
 
+    private val _showWelcomeTips = MutableStateFlow(false)
+    val showWelcomeTips: StateFlow<Boolean> = _showWelcomeTips.asStateFlow()
+
     private var currentBenchmarkAdapter = ""
     private var currentBenchmarkCable = ""
     private var telemetryJob: Job? = null
 
     init {
         _benchmarkSessions.value = loadSessionsFromDisk()
+        _showWelcomeTips.value = checkShouldShowWelcomeTips()
         startTelemetryLoop()
         observeServiceLiveStats()
+    }
+
+    private fun checkShouldShowWelcomeTips(): Boolean {
+        val prefs = getApplication<Application>().getSharedPreferences("watt_benchmark_prefs", Context.MODE_PRIVATE)
+        val dontShow = prefs.getBoolean("dont_show_welcome_tips", false)
+        return !dontShow
+    }
+
+    fun dismissWelcomeTips(dontShowAgain: Boolean) {
+        _showWelcomeTips.value = false
+        if (dontShowAgain) {
+            val prefs = getApplication<Application>().getSharedPreferences("watt_benchmark_prefs", Context.MODE_PRIVATE)
+            prefs.edit().putBoolean("dont_show_welcome_tips", true).apply()
+        }
     }
 
     fun setPollingInterval(intervalMs: Long) {
@@ -80,7 +98,7 @@ class WattViewModel(application: Application) : AndroidViewModel(application) {
 
                 // Maintain rolling history of last 60 seconds
                 val currentHistory = _wattHistory.value.toMutableList()
-                currentHistory.add(WattSample(_powerStats.value.powerWatts, _powerStats.value.isCharging))
+                currentHistory.add(WattSample(_powerStats.value.powerWatts, _powerStats.value.isCharging, _powerStats.value.batteryLevel, true))
                 if (currentHistory.size > 60) {
                     currentHistory.removeAt(0)
                 }
@@ -226,6 +244,8 @@ class WattViewModel(application: Application) : AndroidViewModel(application) {
                         val sampleObj = JSONObject()
                         sampleObj.put("watt", sample.watt)
                         sampleObj.put("isCharging", sample.isCharging)
+                        sampleObj.put("batteryLevel", sample.batteryLevel)
+                        sampleObj.put("isScreenOn", sample.isScreenOn)
                         samplesArr.put(sampleObj)
                     }
                     put("wattSamples", samplesArr)
@@ -252,7 +272,14 @@ class WattViewModel(application: Application) : AndroidViewModel(application) {
                     for (j in 0 until samplesArr.length()) {
                         val item = samplesArr.get(j)
                         if (item is JSONObject) {
-                            samplesList.add(WattSample(item.getDouble("watt"), item.optBoolean("isCharging", true)))
+                            samplesList.add(
+                                WattSample(
+                                    watt = item.getDouble("watt"),
+                                    isCharging = item.optBoolean("isCharging", true),
+                                    batteryLevel = item.optInt("batteryLevel", 0),
+                                    isScreenOn = item.optBoolean("isScreenOn", true)
+                                )
+                            )
                         } else if (item is Number) {
                             samplesList.add(WattSample(item.toDouble(), true))
                         }

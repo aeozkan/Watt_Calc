@@ -320,7 +320,7 @@ fun BenchmarkSessionCard(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Metrics Row: Peak Watts | Avg Watts | Touched Point Watt (replaces Avg Volts)
+            // Metrics Row: Peak Watts | Avg Watts | Touched Point Watt & Battery & Screen Status
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
@@ -347,15 +347,18 @@ fun BenchmarkSessionCard(
                     Text(stringResource(R.string.metric_point_watt), fontSize = 10.sp, fontFamily = FontFamily.Monospace, color = TextSecondary)
                     val sample = touchedSample
                     if (sample != null) {
-                        val textVal = if (sample.isCharging) {
+                        val wattStr = if (sample.isCharging) {
                             String.format(Locale.US, "%.1f W", sample.watt)
                         } else {
                             String.format(Locale.US, "-%.1f W", sample.watt)
                         }
+                        val screenStatusStr = if (sample.isScreenOn) " 📱" else " 🔒"
+                        val batteryStr = if (sample.batteryLevel > 0) " / %${sample.batteryLevel}" else ""
+                        val textVal = "$wattStr$batteryStr$screenStatusStr"
                         val textColor = if (sample.isCharging) NeonCyan else NeonAmber
                         Text(
                             text = textVal,
-                            fontSize = 16.sp,
+                            fontSize = 13.sp,
                             fontWeight = FontWeight.Bold,
                             color = textColor
                         )
@@ -432,14 +435,14 @@ fun BenchmarkWattChart(
     modifier: Modifier = Modifier
 ) {
     val scrollState = rememberScrollState()
-    val minStepPx = 18.dp
+    val minStepPx = 22.dp
     val textMeasurer = rememberTextMeasurer()
     val notEnoughSamplesText = stringResource(R.string.chart_not_enough_samples)
 
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(140.dp)
+            .height(150.dp)
             .clip(RoundedCornerShape(10.dp))
             .background(MaterialTheme.colorScheme.surfaceVariant)
             .padding(8.dp)
@@ -498,7 +501,7 @@ fun BenchmarkWattChart(
                             }
                     ) {
                         val leftPaddingPx = 36.dp.toPx()
-                        val bottomPaddingPx = 20.dp.toPx()
+                        val bottomPaddingPx = 24.dp.toPx()
                         val topPaddingPx = 12.dp.toPx()
                         val rightPaddingPx = 12.dp.toPx()
 
@@ -515,6 +518,10 @@ fun BenchmarkWattChart(
                             color = TextSecondary,
                             fontSize = 9.sp,
                             fontFamily = FontFamily.Monospace
+                        )
+                        val iconTextStyle = TextStyle(
+                            color = Color.White,
+                            fontSize = 8.sp
                         )
 
                         // 1. Draw Y-Axis Labels & Horizontal Grid Lines
@@ -544,16 +551,73 @@ fun BenchmarkWattChart(
                             )
                         }
 
-                        // 2. Draw X-Axis Time Ticks & Labels
-                        val timeStepInterval = (samples.size / 5).coerceAtLeast(1)
-                        for (i in 0 until samples.size step timeStepInterval) {
+                        // 2. Screen On/Off Background Region & Transition Indicators
+                        for (i in 0 until samples.size - 1) {
+                            val s1 = samples[i]
+                            val s2 = samples[i + 1]
+                            val x1 = leftPaddingPx + i * stepX
+                            val x2 = leftPaddingPx + (i + 1) * stepX
+
+                            // If screen is OFF (ideal test condition), tint region background slightly darker with a subtle accent line
+                            if (!s1.isScreenOn) {
+                                drawRect(
+                                    color = Color(0x1A10B981), // subtle emerald green tint for screen off optimal test
+                                    topLeft = androidx.compose.ui.geometry.Offset(x1, topPaddingPx),
+                                    size = androidx.compose.ui.geometry.Size(x2 - x1, chartHeight)
+                                )
+                            }
+
+                            // Detect Screen ON <-> OFF transition
+                            if (s1.isScreenOn != s2.isScreenOn) {
+                                val transX = x2
+                                drawLine(
+                                    color = if (s2.isScreenOn) NeonAmber else NeonGreen,
+                                    start = androidx.compose.ui.geometry.Offset(transX, topPaddingPx),
+                                    end = androidx.compose.ui.geometry.Offset(transX, topPaddingPx + chartHeight),
+                                    strokeWidth = 1.dp.toPx()
+                                )
+                                val iconStr = if (s2.isScreenOn) "📱" else "🔒"
+                                val iconLayout = textMeasurer.measure(iconStr, iconTextStyle)
+                                drawText(
+                                    textLayoutResult = iconLayout,
+                                    topLeft = androidx.compose.ui.geometry.Offset(
+                                        x = transX - iconLayout.size.width / 2f,
+                                        y = topPaddingPx - 2.dp.toPx()
+                                    )
+                                )
+                            }
+                        }
+
+                        // 3. Draw X-Axis Time Ticks & Battery Level %
+                        val tickIndices = mutableListOf<Int>()
+                        val firstMinLimit = 60.coerceAtMost(samples.lastIndex)
+                        for (i in 0..firstMinLimit step 10) {
+                            tickIndices.add(i)
+                        }
+                        if (samples.lastIndex > 60) {
+                            for (i in 90..samples.lastIndex step 30) {
+                                tickIndices.add(i)
+                            }
+                        }
+
+                        for (i in tickIndices) {
                             val xPos = leftPaddingPx + i * stepX
                             val minutes = i / 60
                             val seconds = i % 60
-                            val timeLabel = if (minutes > 0) "${minutes}m ${seconds}s" else "${seconds}s"
+                            val timeStr = if (minutes > 0) "${minutes}m ${seconds}s" else "${seconds}s"
+                            val sample = samples[i]
+                            val labelStr = if (sample.batteryLevel > 0) "$timeStr, %${sample.batteryLevel}" else timeStr
 
-                            // X Label
-                            val textLayout = textMeasurer.measure(timeLabel, labelTextStyle)
+                            // Vertical tick mark
+                            drawLine(
+                                color = Color(0xFF475569),
+                                start = androidx.compose.ui.geometry.Offset(xPos, size.height - bottomPaddingPx),
+                                end = androidx.compose.ui.geometry.Offset(xPos, size.height - bottomPaddingPx + 4.dp.toPx()),
+                                strokeWidth = 1.dp.toPx()
+                            )
+
+                            // X Label (Time + Battery %)
+                            val textLayout = textMeasurer.measure(labelStr, labelTextStyle)
                             drawText(
                                 textLayoutResult = textLayout,
                                 topLeft = androidx.compose.ui.geometry.Offset(
@@ -563,7 +627,7 @@ fun BenchmarkWattChart(
                             )
                         }
 
-                        // 3. Draw Segment Line & Fills
+                        // 4. Draw Segment Line & Fills
                         for (i in 0 until samples.size - 1) {
                             val s1 = samples[i]
                             val s2 = samples[i + 1]
@@ -686,11 +750,14 @@ fun FullGraphModalDialog(
                 if (modalTouchedSample != null) {
                     Spacer(modifier = Modifier.height(8.dp))
                     val sample = modalTouchedSample!!
-                    val textVal = if (sample.isCharging) {
+                    val wattStr = if (sample.isCharging) {
                         String.format(Locale.US, "Selected Point: %.1f W", sample.watt)
                     } else {
                         String.format(Locale.US, "Selected Point: -%.1f W", sample.watt)
                     }
+                    val screenStatusStr = if (sample.isScreenOn) " 📱" else " 🔒"
+                    val batteryStr = if (sample.batteryLevel > 0) " / %${sample.batteryLevel}" else ""
+                    val textVal = "$wattStr$batteryStr$screenStatusStr"
                     val textColor = if (sample.isCharging) NeonCyan else NeonAmber
                     Text(
                         text = textVal,

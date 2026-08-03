@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="about_dialog_body">WattBench, yüksek hassasiyetli bir canlı telemetri ve şarj cihazı benchmark uygulamasıdır.\n\nTeknoloji meraklılarının canlı Watt, voltaj ve akım değerlerini ölçmesi, USB kablolarını ve şarj cihazlarını milisaniyelik hassasiyetle test etmesi için tasarlanmıştır.\n\nSürüm: 1.0.0</string>
+    <string name="about_dialog_title">WattBench Hakkında</string>
+    <string name="app_header_benchmark">ŞARJ CİHAZI &amp; KABLO TESTİ</string>
+    <string name="app_header_live">WATT HESAPLAYICI</string>
+    <string name="app_name">WattBench</string>
+    <string name="app_version_info">WattBench v1.0.0 (Sürüm 1)</string>
+    <string name="battery_capacity_label">Fabrika Pil Kapasitesi</string>
+    <string name="battery_health_label">Pil Sağlığı</string>
+    <string name="benchmark_in_progress">TEST DEVAM EDİYOR (ARKA PLAN VERİSİ KAYDEDİLİYOR)...</string>
+    <string name="benchmark_start_new">YENİ BENCHMARK TESTİ BAŞLAT</string>
+    <string name="btn_export_csv">Test Sonuçlarını CSV Olarak Dışa Aktar</string>
+    <string name="btn_got_it">Anladım!</string>
+    <string name="btn_start_benchmark">BENCHMARK TESTİNİ BAŞLAT</string>
+    <string name="btn_stop_benchmark">BENCHMARK TESTİNİ DURDUR</string>
+    <string msgid="881409763997275156" name="call_notification_answer_action">"Yanıtla"</string>
+    <string msgid="8793775615905189152" name="call_notification_answer_video_action">"Video"</string>
+    <string msgid="3229508546291798546" name="call_notification_decline_action">"Reddet"</string>
+    <string msgid="2659457946726154263" name="call_notification_hang_up_action">"Kapat"</string>
+    <string msgid="6107532579223922871" name="call_notification_incoming_text">"Gelen arama"</string>
+    <string msgid="8623827134497363134" name="call_notification_ongoing_text">"Devam eden arama"</string>
+    <string msgid="59049573811482460" name="call_notification_screening_text">"Gelen arama süzülüyor"</string>
+    <string name="chart_full_detailed_title">DETAYLI ZAMAN ÇİZELGESİ GRAFİĞİ</string>
+    <string name="chart_modal_hint">💡 Grafik üzerindeki herhangi bir noktaya dokunarak veya basılı tutarak anlık Watt değerini inceleyin.</string>
+    <string name="chart_not_enough_samples">Yetersiz veri</string>
+    <string name="chart_realtime_title">CANLI WATT GRAFİĞİ (SON 60SN)</string>
+    <string name="chart_waiting_data">Canlı veri bekleniyor...</string>
+    <string name="chart_watt_time_graph">WATT - ZAMAN GRAFİĞİ (%1$d ÖRNEK)</string>
+    <string msgid="406453423630273620" name="close_drawer">"Gezinme menüsünü kapat"</string>
+    <string msgid="7573152094250666567" name="close_sheet">"Sayfayı kapat"</string>
+    <string msgid="8038256446254964252" name="default_error_message">"Geçersiz giriş"</string>
+    <string msgid="6312721426453364202" name="default_popup_window_title">"Pop-up Pencere"</string>
+    <string name="dialog_close">Kapat</string>
+    <string msgid="1890207353314751437" name="dropdown_menu">"Açılır menü"</string>
+    <string name="duration_min">%1$d dk</string>
+    <string name="duration_min_sec">%1$d dk %2$d sn</string>
+    <string name="duration_sec">%1$d sn</string>
+    <string name="empty_benchmark_msg">Henüz kaydedilmiş bir benchmark testi yok.\nPerformansları karşılaştırmak için yukarıdan bir test başlatın!</string>
+    <string name="health_cold">Soğuk</string>
+    <string name="health_dead">Arızalı</string>
+    <string name="health_good">İyi</string>
+    <string name="health_over_voltage">Yüksek Voltaj</string>
+    <string name="health_overheat">Aşırı Isınmış</string>
+    <string name="health_unspecified">Bilinmiyor</string>
+    <string msgid="6827826412747255547" name="in_progress">"Devam ediyor"</string>
+    <string msgid="7933458017204019916" name="indeterminate">"Kısmi olarak kontrol edildi"</string>
+    <string name="label_cable">Kablo Adı (Örn: 6A Type-C Kablo)</string>
+    <string name="label_charger_adapter">Şarj Cihazı / Adaptör Adı (Örn: Xiaomi 90W)</string>
+    <string name="label_duration">Süre: %1$s</string>
+    <string name="label_end">Bitiş:     %1$s</string>
+    <string name="label_start">Başlangıç: %1$s</string>
+    <string name="live_power_label">Canlı Güç:</string>
+    <string msgid="2988463736136100848" name="m3c_bottom_sheet_collapse_description">"Alt sayfayı daralt"</string>
+    <string msgid="1555567894577437024" name="m3c_bottom_sheet_dismiss_description">"Alt sayfayı kapat"</string>
+    <string msgid="8403354765404029791" name="m3c_bottom_sheet_drag_handle_description">"Sürükleme tutamacı"</string>
+    <string msgid="6670819569745899763" name="m3c_bottom_sheet_expand_description">"Alt sayfayı genişlet"</string>
+    <string msgid="3010635850035863127" name="m3c_bottom_sheet_pane_title">"Alt Sayfa"</string>
+    <string msgid="8166741421776570875" name="m3c_date_input_headline">"Girilen tarih"</string>
+    <string msgid="229313757840775812" name="m3c_date_input_headline_description">"Girilen tarih: %1$s"</string>
+    <string msgid="6116910750161463197" name="m3c_date_input_invalid_for_pattern">"Tarih, istenen biçimle eşleşmiyor: %1$s"</string>
+    <string msgid="2521768508935305279" name="m3c_date_input_invalid_not_allowed">"Tarihe izin verilmiyor: %1$s"</string>
+    <string msgid="7052898923934555305" name="m3c_date_input_invalid_year_range">"Tarih, istenen %1$s-%2$s yıl aralığının dışında"</string>
+    <string msgid="2895559812010326913" name="m3c_date_input_label">"Tarih"</string>
+    <string msgid="1237013946323089826" name="m3c_date_input_no_input_description">"Yok"</string>
+    <string msgid="7306227249789210568" name="m3c_date_input_title">"Tarih seç"</string>
+    <string msgid="7605002211875882969" name="m3c_date_picker_headline">"Seçilen tarih"</string>
+    <string msgid="3664277305226978227" name="m3c_date_picker_headline_description">"Geçerli seçim: %1$s"</string>
+    <string msgid="8436650776581492840" name="m3c_date_picker_navigate_to_year_description">"%1$s yılına gidin"</string>
+    <string msgid="5811000998184572395" name="m3c_date_picker_no_selection_description">"Yok"</string>
+    <string msgid="7813882352367152251" name="m3c_date_picker_scroll_to_earlier_years">"Önceki yılları göstermek için kaydırın"</string>
+    <string msgid="5727367015496556177" name="m3c_date_picker_scroll_to_later_years">"Sonraki yılları göstermek için kaydırın"</string>
+    <string msgid="1804346892470238807" name="m3c_date_picker_switch_to_calendar_mode">"Takvim giriş moduna geç"</string>
+    <string msgid="395627960681594326" name="m3c_date_picker_switch_to_day_selection">"Kaydırarak bir yıl seçin veya gün seçme bölümüne geri dönmek için dokunun"</string>
+    <string msgid="2219746470065162704" name="m3c_date_picker_switch_to_input_mode">"Metin giriş moduna geç"</string>
+    <string msgid="7142101321095356500" name="m3c_date_picker_switch_to_next_month">"Sonraki aya değiştir"</string>
+    <string msgid="228438865139394590" name="m3c_date_picker_switch_to_previous_month">"Önceki aya değiştir"</string>
+    <string msgid="791651718641787594" name="m3c_date_picker_switch_to_year_selection">"Yıl seçimine geç"</string>
+    <string msgid="7430790972741451689" name="m3c_date_picker_title">"Tarih seç"</string>
+    <string msgid="3199387177749801575" name="m3c_date_picker_today_description">"Bugün"</string>
+    <string msgid="2068382232816991922" name="m3c_date_picker_year_picker_pane_title">"Yıl seçici görünür durumda"</string>
+    <string msgid="3190049423327661366" name="m3c_date_range_input_invalid_range_input">"Geçersiz tarih aralığı girişi"</string>
+    <string msgid="3148384720560189467" name="m3c_date_range_input_title">"Tarihleri girin"</string>
+    <string msgid="2138321128465719402" name="m3c_date_range_picker_day_in_range">"Aralıkta"</string>
+    <string msgid="4947636797751277713" name="m3c_date_range_picker_end_headline">"Bitiş tarihi"</string>
+    <string msgid="602077859540990149" name="m3c_date_range_picker_scroll_to_next_month">"Sonraki ayı göstermek için kaydırın"</string>
+    <string msgid="4592174524846109496" name="m3c_date_range_picker_scroll_to_previous_month">"Önceki ayı göstermek için kaydırın"</string>
+    <string msgid="4665981448952749820" name="m3c_date_range_picker_start_headline">"Başlangıç tarihi"</string>
+    <string msgid="3134165431120340385" name="m3c_date_range_picker_title">"Tarihleri seçin"</string>
+    <string msgid="7617233117134790350" name="m3c_dialog">"Dialog"</string>
+    <string msgid="3177828188723359358" name="m3c_dropdown_menu_collapsed">"Daraltıldı"</string>
+    <string msgid="2360841780724299882" name="m3c_dropdown_menu_expanded">"Genişletildi"</string>
+    <string msgid="8687821690726149911" name="m3c_dropdown_menu_toggle">"Açılır menüyü açın/kapatın"</string>
+    <string msgid="6152806324422087846" name="m3c_search_bar_search">"Arama"</string>
+    <string msgid="6152755701819882931" name="m3c_snackbar_dismiss">"Kapat"</string>
+    <string msgid="7655536806087401899" name="m3c_suggestions_available">"Önerileri aşağıda bulabilirsiniz"</string>
+    <string msgid="2786685010796619560" name="m3c_time_picker_am">"ÖÖ"</string>
+    <string msgid="2349193472625211372" name="m3c_time_picker_hour">"Saat"</string>
+    <string msgid="9179527532316922345" name="m3c_time_picker_hour_24h_suffix">"%1$d saat"</string>
+    <string msgid="8876759303332837035" name="m3c_time_picker_hour_selection">"Saat seçin"</string>
+    <string msgid="3458167507790628988" name="m3c_time_picker_hour_suffix">"Saat %1$d"</string>
+    <string msgid="6973808109666874069" name="m3c_time_picker_hour_text_field">"saat"</string>
+    <string msgid="4313071914266462005" name="m3c_time_picker_minute">"Dakika"</string>
+    <string msgid="4699133535056739733" name="m3c_time_picker_minute_selection">"Dakikayı seçin"</string>
+    <string msgid="5064177921781937179" name="m3c_time_picker_minute_suffix">"%1$d dakika"</string>
+    <string msgid="7661234488295443182" name="m3c_time_picker_minute_text_field">"dakika"</string>
+    <string msgid="5865171949528594571" name="m3c_time_picker_period_toggle_description">"ÖÖ veya ÖS\'yi seçin"</string>
+    <string msgid="6616362054113087709" name="m3c_time_picker_pm">"ÖS"</string>
+    <string msgid="1805687647081129904" name="m3c_tooltip_long_press_label">"Araç ipucunu göster"</string>
+    <string msgid="5460405025248574620" name="m3c_tooltip_pane_description">"İpucu"</string>
+    <string name="menu_about">WattBench Hakkında</string>
+    <string name="menu_privacy_policy">Gizlilik Politikası</string>
+    <string name="menu_rate_app">Uygulamayı Değerlendir</string>
+    <string name="menu_title">Ayarlar &amp; Araçlar</string>
+    <string name="metric_average_power">ORTALAMA GÜÇ</string>
+    <string name="metric_avg_watts">ORT. WATT</string>
+    <string name="metric_battery_level">Pil Seviyesi</string>
+    <string name="metric_current">Akım</string>
+    <string name="metric_peak_power">ZİRVE GÜÇ</string>
+    <string name="metric_peak_watts">ZİRVE WATT</string>
+    <string name="metric_point_watt">NOKTA WATT</string>
+    <string name="metric_temperature">Sıcaklık</string>
+    <string name="metric_voltage">Voltaj</string>
+    <string name="msg_no_sessions_export">Dışa aktarılacak kaydedilmiş benchmark testi yok.</string>
+    <string msgid="542007171693138492" name="navigation_menu">"Gezinme menüsü"</string>
+    <string msgid="6610465462668679431" name="not_selected">"Seçili değil"</string>
+    <string name="notif_charging">Şarj Ediliyor: %.1f W | %.2f V | %.0f mA</string>
+    <string name="notif_discharging">Deşarj Oluyor: %.1f W | Pil: %d%%</string>
+    <string name="notif_title_live">⚡ Canlı Watt Telemetrisi</string>
+    <string name="notif_title_recording">⚡ Watt Benchmark Kaydediliyor</string>
+    <string name="plug_ac">AC Duvar Şarj Cihazı</string>
+    <string name="plug_connected">Bağlandı</string>
+    <string name="plug_disconnected">Bağlantı Kesildi</string>
+    <string name="plug_usb">USB Portu</string>
+    <string name="plug_wireless">Kablosuz Şarj</string>
+    <string name="polling_1000ms">Standart (1 sn)</string>
+    <string name="polling_2000ms">Pil Tasarruflu (2 sn)</string>
+    <string name="polling_500ms">Hızlı (500 ms)</string>
+    <string name="polling_rate_title">Ölçüm Sıklığı (Yenileme Aralığı)</string>
+    <string name="privacy_dialog_body">WattBench gizliliğinize önem verir.\n\n• %100 Yerel İşleme: Tüm voltaj, akım ve Watt ölçümleri tamamen cihazınız üzerinde hesaplanır.\n• Kişisel Veri Toplanmaz: Hiçbir kişisel veri, konum veya cihaz kimliği herhangi bir sunucuya toplanmaz, saklanmaz veya gönderilmez.\n• Veri Dışa Aktarma: Dışa aktarılan CSV dosyaları yerel olarak üretilir ve yalnızca siz paylaşmayı seçtiğinizde geçici önbelleğe yazılır.</string>
+    <string name="privacy_dialog_title">Gizlilik Politikası</string>
+    <string name="profile_fast">Hızlı Şarj (18W+)</string>
+    <string name="profile_header">ŞARJ PROFİLİ</string>
+    <string name="profile_normal">Normal Şarj (7.5W+)</string>
+    <string name="profile_not_charging">Şarj Edilmiyor</string>
+    <string name="profile_slow">Yavaş / Damlama Şarjı</string>
+    <string name="profile_super_turbo">Super Turbo Charge (33W+)</string>
+    <string name="profile_ultra_hyper">Ultra HyperCharge (65W+)</string>
+    <string msgid="5941395253238309765" name="range_end">"Aralık sonu"</string>
+    <string msgid="7097486360902471446" name="range_start">"Aralık başlangıcı"</string>
+    <string name="saved_results_title">KAYDEDİLEN BENCHMARK SONUÇLARI</string>
+    <string name="section_about">HAKKINDA &amp; YASAL</string>
+    <string name="section_battery_info">PİL &amp; CİHAZ BİLGİSİ</string>
+    <string name="section_export">VERİ DIŞA AKTARMA</string>
+    <string name="section_settings">AYARLAR &amp; TERCİHLER</string>
+    <string msgid="6043586758067023" name="selected">"Seçili"</string>
+    <string msgid="4139871816613051306" name="state_empty">"Boş"</string>
+    <string msgid="5834637030682409883" name="state_off">"Kapalı"</string>
+    <string msgid="1490883874751719580" name="state_on">"Açık"</string>
+    <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="status_charging_active">ŞARJ EDİLİYOR • %1$s</string>
+    <string name="status_disconnected">BAĞLANTI YOK</string>
+    <string name="subtitle_benchmark">Farklı şarj adaptörlerini ve USB kablolarını karşılaştırın</string>
+    <string msgid="2561197295334830845" name="switch_role">"Anahtar"</string>
+    <string msgid="1672349317127674378" name="tab">"Sekme"</string>
+    <string name="tab_benchmark">Benchmark</string>
+    <string name="tab_live">Canlı Telemetri</string>
+    <string msgid="5946805113151406391" name="template_percent">"Yüzde <ns1:g id="PERCENTAGE">%1$d</ns1:g>."</string>
+    <string name="tips_dialog_title">💡 En İyi Sonuçlar İçin İpuçları</string>
+    <string name="tips_dont_show_again">Bunu bir daha gösterme</string>
+    <string name="tips_item_1_body">Ekranın güç tüketimi olmadan en doğru Watt değerini ölçmek için test sırasında telefon ekranınızı kilitleyin. Telemetri arka planda kaydetmeye devam edecektir.</string>
+    <string name="tips_item_1_title">1. Ekran Kapalıyken Test Edin</string>
+    <string name="tips_item_2_body">Farklı duvar adaptörlerini ve USB Type-C kablolarını kaydetmek ve performanslarını karşılaştırmak için Benchmark sekmesini kullanın.</string>
+    <string name="tips_item_2_title">2. Şarj Cihazı ve Kabloları Karşılaştırın</string>
+    <string msgid="3765533235322692011" name="tooltip_description">"ipucu"</string>
+    <string msgid="3124740595719787496" name="tooltip_label">"ipucunu göster"</string>
+    <string name="unit_watts_label">WATT</string>
+</resources>

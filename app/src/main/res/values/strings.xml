@@ -110,4 +110,13 @@
 
     <string name="about_dialog_title">About WattBench</string>
     <string name="about_dialog_body">WattBench is a modern, high-precision power telemetry and charger benchmark application.\n\nDesigned for technology enthusiasts to measure live wattage, voltage, current, and test USB cables &amp; chargers with sub-second accuracy.\n\nVersion: 1.0.0</string>
+
+    <!-- Welcome & Tips Dialog -->
+    <string name="tips_dialog_title">💡 Tips for Best Results</string>
+    <string name="tips_item_1_title">1. Test With Screen Locked</string>
+    <string name="tips_item_1_body">For the most accurate wattage measurement without screen power consumption, lock your phone screen during testing. Power telemetry will continue recording in the background.</string>
+    <string name="tips_item_2_title">2. Compare Chargers &amp; Cables</string>
+    <string name="tips_item_2_body">Use the Benchmark tab to record and compare performance across different wall adapters and USB Type-C cables.</string>
+    <string name="tips_dont_show_again">Don\'t show this again</string>
+    <string name="btn_got_it">Got It!</string>
 </resources>

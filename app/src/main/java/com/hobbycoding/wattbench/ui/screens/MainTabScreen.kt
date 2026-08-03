@@ -12,6 +12,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hobbycoding.wattbench.R
 import com.hobbycoding.wattbench.ui.components.SettingsBottomSheet
+import com.hobbycoding.wattbench.ui.components.WelcomeTipsDialog
 import com.hobbycoding.wattbench.ui.theme.NeonCyan
 import com.hobbycoding.wattbench.ui.theme.TextSecondary
 import com.hobbycoding.wattbench.ui.viewmodel.WattViewModel
@@ -28,6 +29,7 @@ fun MainTabScreen(
     val isRecordingBenchmark by viewModel.isRecordingBenchmark.collectAsState()
     val benchmarkSessions by viewModel.benchmarkSessions.collectAsState()
     val pollingIntervalMs by viewModel.pollingIntervalMs.collectAsState()
+    val showWelcomeTips by viewModel.showWelcomeTips.collectAsState()
 
     Scaffold(
         bottomBar = {
@@ -81,6 +83,12 @@ fun MainTabScreen(
                     onOpenSettings = { showSettingsSheet = true }
                 )
             }
+        }
+
+        if (showWelcomeTips) {
+            WelcomeTipsDialog(
+                onDismiss = { dontShowAgain -> viewModel.dismissWelcomeTips(dontShowAgain) }
+            )
         }
 
         if (showSettingsSheet) {
