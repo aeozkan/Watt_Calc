@@ -3,6 +3,7 @@ package com.hobbycoding.wattbench.ui.screens
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -432,17 +433,20 @@ fun BenchmarkSessionCard(
 fun BenchmarkWattChart(
     samples: List<WattSample>,
     onSampleSelected: ((WattSample) -> Unit)? = null,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    enablePinchZoom: Boolean = false
 ) {
     val scrollState = rememberScrollState()
-    val minStepPx = 22.dp
+    var zoomScale by remember { mutableFloatStateOf(1f) }
+    var selectedIndex by remember { mutableStateOf<Int?>(null) }
+
     val textMeasurer = rememberTextMeasurer()
     val notEnoughSamplesText = stringResource(R.string.chart_not_enough_samples)
 
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(150.dp)
+            .height(if (enablePinchZoom) 220.dp else 150.dp)
             .clip(RoundedCornerShape(10.dp))
             .background(MaterialTheme.colorScheme.surfaceVariant)
             .padding(8.dp)
@@ -461,13 +465,37 @@ fun BenchmarkWattChart(
         } else {
             BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
                 val containerWidth = maxWidth
-                val totalCalculatedWidth = (samples.size * minStepPx.value).dp.coerceAtLeast(containerWidth)
+                val baseStep = 22.dp
+
+                // 30 seconds visible on screen (Max zoom in) -> step size = containerWidth / 30
+                // 30 minutes (1800 seconds) visible on screen (Max zoom out) -> step size = containerWidth / 1800
+                val maxZoomInStep = (containerWidth / 30f).coerceAtLeast(10.dp)
+                val maxZoomOutStep = (containerWidth / 1800f).coerceAtLeast(0.2.dp)
+
+                val effectiveStepPx = (baseStep * zoomScale).coerceIn(maxZoomOutStep, maxZoomInStep)
+                val totalCalculatedWidth = (samples.size * effectiveStepPx.value).dp.coerceAtLeast(containerWidth)
 
                 Box(
                     modifier = Modifier
                         .fillMaxHeight()
                         .horizontalScroll(scrollState)
                         .width(totalCalculatedWidth)
+                        .then(
+                            if (enablePinchZoom) {
+                                Modifier.pointerInput(Unit) {
+                                    detectTransformGestures { _, pan, zoom, _ ->
+                                        if (zoom != 1f) {
+                                            val minScale = (maxZoomOutStep.value / baseStep.value).coerceAtLeast(0.005f)
+                                            val maxScale = (maxZoomInStep.value / baseStep.value).coerceAtLeast(1f)
+                                            zoomScale = (zoomScale * zoom).coerceIn(minScale, maxScale)
+                                        }
+                                        if (pan.x != 0f) {
+                                            scrollState.dispatchRawDelta(-pan.x)
+                                        }
+                                    }
+                                }
+                            } else Modifier
+                        )
                 ) {
                     Canvas(
                         modifier = Modifier
@@ -484,6 +512,7 @@ fun BenchmarkWattChart(
 
                                         val touchX = (offset.x - leftPaddingPx).coerceIn(0f, chartWidth)
                                         val idx = (touchX / stepX).toInt().coerceIn(0, samples.lastIndex)
+                                        selectedIndex = idx
                                         onSampleSelected?.invoke(samples[idx])
                                     },
                                     onTap = { offset ->
@@ -495,6 +524,7 @@ fun BenchmarkWattChart(
 
                                         val touchX = (offset.x - leftPaddingPx).coerceIn(0f, chartWidth)
                                         val idx = (touchX / stepX).toInt().coerceIn(0, samples.lastIndex)
+                                        selectedIndex = idx
                                         onSampleSelected?.invoke(samples[idx])
                                     }
                                 )
@@ -502,7 +532,7 @@ fun BenchmarkWattChart(
                     ) {
                         val leftPaddingPx = 36.dp.toPx()
                         val bottomPaddingPx = 24.dp.toPx()
-                        val topPaddingPx = 12.dp.toPx()
+                        val topPaddingPx = 16.dp.toPx()
                         val rightPaddingPx = 12.dp.toPx()
 
                         val chartWidth = size.width - leftPaddingPx - rightPaddingPx
@@ -519,9 +549,10 @@ fun BenchmarkWattChart(
                             fontSize = 9.sp,
                             fontFamily = FontFamily.Monospace
                         )
+                        // Larger Emojis (15sp) for Screen On/Off transition markers
                         val iconTextStyle = TextStyle(
                             color = Color.White,
-                            fontSize = 8.sp
+                            fontSize = 15.sp
                         )
 
                         // 1. Draw Y-Axis Labels & Horizontal Grid Lines
@@ -558,7 +589,7 @@ fun BenchmarkWattChart(
                             val x1 = leftPaddingPx + i * stepX
                             val x2 = leftPaddingPx + (i + 1) * stepX
 
-                            // If screen is OFF (ideal test condition), tint region background slightly darker with a subtle accent line
+                            // If screen is OFF (ideal test condition), tint region background slightly darker
                             if (!s1.isScreenOn) {
                                 drawRect(
                                     color = Color(0x1A10B981), // subtle emerald green tint for screen off optimal test
@@ -567,7 +598,7 @@ fun BenchmarkWattChart(
                                 )
                             }
 
-                            // Detect Screen ON <-> OFF transition
+                            // Detect Screen ON <-> OFF transition (Thin line: 1.dp)
                             if (s1.isScreenOn != s2.isScreenOn) {
                                 val transX = x2
                                 drawLine(
@@ -582,7 +613,7 @@ fun BenchmarkWattChart(
                                     textLayoutResult = iconLayout,
                                     topLeft = androidx.compose.ui.geometry.Offset(
                                         x = transX - iconLayout.size.width / 2f,
-                                        y = topPaddingPx - 2.dp.toPx()
+                                        y = topPaddingPx - 14.dp.toPx()
                                     )
                                 )
                             }
@@ -662,6 +693,35 @@ fun BenchmarkWattChart(
                                 cap = StrokeCap.Round
                             )
                         }
+
+                        // 5. Draw Selected Touch Vertical Line & Dot Indicator (Thicker Line: 3.dp vs 1.dp for transitions)
+                        val activeIdx = selectedIndex
+                        if (activeIdx != null && activeIdx in samples.indices) {
+                            val selX = leftPaddingPx + activeIdx * stepX
+                            val selSample = samples[activeIdx]
+                            val selY = topPaddingPx + chartHeight - ((selSample.watt.toFloat() - minWatts) / (maxWatts - minWatts) * chartHeight)
+
+                            // Thicker vertical touch indicator line (3.dp stroke width)
+                            drawLine(
+                                color = NeonCyan,
+                                start = androidx.compose.ui.geometry.Offset(selX, topPaddingPx),
+                                end = androidx.compose.ui.geometry.Offset(selX, size.height - bottomPaddingPx),
+                                strokeWidth = 3.dp.toPx()
+                            )
+
+                            // Outer glowing dot
+                            drawCircle(
+                                color = PeakGold,
+                                radius = 6.dp.toPx(),
+                                center = androidx.compose.ui.geometry.Offset(selX, selY)
+                            )
+                            // Inner white core dot
+                            drawCircle(
+                                color = Color.White,
+                                radius = 3.dp.toPx(),
+                                center = androidx.compose.ui.geometry.Offset(selX, selY)
+                            )
+                        }
                     }
                 }
             }
@@ -683,7 +743,7 @@ fun FullGraphModalDialog(
         Card(
             modifier = Modifier
                 .fillMaxWidth(0.95f)
-                .fillMaxHeight(0.85f)
+                .fillMaxHeight(0.88f)
                 .padding(8.dp),
             shape = RoundedCornerShape(24.dp),
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
@@ -769,7 +829,7 @@ fun FullGraphModalDialog(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Scrollable Detailed Chart in Modal
+                // Scrollable & Pinch-to-Zoom Detailed Chart in Modal
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -781,14 +841,15 @@ fun FullGraphModalDialog(
                     BenchmarkWattChart(
                         samples = session.wattSamples,
                         onSampleSelected = { modalTouchedSample = it },
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier.fillMaxSize(),
+                        enablePinchZoom = true
                     )
                 }
 
                 Spacer(modifier = Modifier.height(12.dp))
 
                 Text(
-                    text = stringResource(R.string.chart_modal_hint),
+                    text = "💡 Grafiği 1 parmağınızla yana kaydırabilir veya 2 parmağınızla (pinch-zoom) yakınlaştırabilirsiniz.",
                     fontSize = 11.sp,
                     fontFamily = FontFamily.Monospace,
                     color = TextSecondary

@@ -70,7 +70,7 @@
     <string name="profile_header">ŞARJ PROFİLİ</string>
     <string name="profile_normal">Normal Şarj (7.5W+)</string>
     <string name="profile_not_charging">Şarj Edilmiyor</string>
-    <string name="profile_slow">Yavaş / Damlama Şarjı</string>
+    <string name="profile_slow">Yavaş Şarj</string>
     <string name="profile_super_turbo">Super Turbo Charge (33W+)</string>
     <string name="profile_ultra_hyper">Ultra HyperCharge (65W+)</string>
     <string name="saved_results_title">KAYDEDİLEN BENCHMARK SONUÇLARI</string>
