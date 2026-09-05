@@ -1,8 +1,8 @@
 <variant
     name="release"
     package="com.hobbycoding.wattbench"
-    minSdkVersion="26"
-    targetSdkVersion="35"
+    minSdkVersion="23"
+    targetSdkVersion="36"
     mergedManifest="build\intermediates\merged_manifest\release\processReleaseMainManifest\AndroidManifest.xml"
     manifestMergeReport="build\outputs\logs\manifest-merger-release-report.txt"
     proguardFiles="build\intermediates\default_proguard_files\global\proguard-android-optimize.txt-8.7.2;proguard-rules.pro"
@@ -26,6 +26,6 @@
       applicationId="com.hobbycoding.wattbench"
       generatedSourceFolders="build\generated\ap_generated_sources\release\out"
       generatedResourceFolders="build\generated\res\resValues\release"
-      desugaredMethodsFiles="C:\Users\aeozk\.gradle\caches\8.9\transforms\0409c31542047fbf35ea14e203949034\transformed\D8BackportedDesugaredMethods.txt">
+      desugaredMethodsFiles="C:\Users\aeozk\.gradle\caches\8.9\transforms\95104a9d87767a67bb362ee597cd6a2d\transformed\D8BackportedDesugaredMethods.txt">
   </artifact>
 </variant>
