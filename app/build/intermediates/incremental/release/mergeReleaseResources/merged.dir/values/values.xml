@@ -132,6 +132,10 @@
     <string name="default_error_message">"Invalid input"</string>
     <string name="default_popup_window_title" ns1:ignore="ExtraTranslation">"Pop-Up Window"</string>
     <string name="dialog_close">Close</string>
+    <string name="dialog_exit_body">Closing the app will terminate real-time battery power (input/output) measurement and telemetry recording. Are you sure you want to exit?</string>
+    <string name="dialog_exit_cancel">Cancel</string>
+    <string name="dialog_exit_confirm">Exit</string>
+    <string name="dialog_exit_title">Exit Application?</string>
     <string name="dropdown_menu">"Dropdown menu"</string>
     <string name="duration_min">%1$d min</string>
     <string name="duration_min_sec">%1$d min %2$d sec</string>
@@ -228,6 +232,7 @@
     <string name="msg_no_sessions_export">No benchmark sessions recorded to export.</string>
     <string name="navigation_menu">"Navigation menu"</string>
     <string name="not_selected">Not selected</string>
+    <string name="notif_action_stop">Stop</string>
     <string name="notif_charging">Charging: %.1f W | %.2f V | %.0f mA</string>
     <string name="notif_discharging">Discharging: %.1f W | Battery: %d%%</string>
     <string name="notif_title_live">⚡ Live Watt Telemetry</string>
@@ -241,7 +246,7 @@
     <string name="polling_2000ms">Battery Saver (2 sec)</string>
     <string name="polling_500ms">Fast (500 ms)</string>
     <string name="polling_rate_title">Polling Rate (Refresh Interval)</string>
-    <string name="privacy_dialog_body">WattBench respects your privacy.\n\n• 100% Local Processing: All voltage, current, and wattage measurements are calculated strictly on your device.\n• No Personal Data Collection: We do not collect, store, or transmit any personal data, location, or identifiers to any remote server.\n• File Export: Exported CSV files are generated locally and stored only in your device\'s temporary cache folder when you choose to share them.</string>
+    <string name="privacy_dialog_body">WattBench respects your privacy.\n\n• 100% Local Processing: All voltage, current, and wattage measurements are calculated strictly on your device.\n• No Personal Data Collection: We do not collect, store, or transmit any personal data, location, or identifiers to any remote server.</string>
     <string name="privacy_dialog_title">Privacy Policy</string>
     <string name="profile_fast">Fast Charge (18W+)</string>
     <string name="profile_header">CHARGING PROFILE</string>
@@ -274,8 +279,8 @@
     <string name="tips_dont_show_again">Don\'t show this again</string>
     <string name="tips_item_1_body">For the most accurate wattage measurement without screen power consumption, lock your phone screen during testing. Power telemetry will continue recording in the background.</string>
     <string name="tips_item_1_title">1. Test With Screen Locked</string>
-    <string name="tips_item_2_body">Use the Benchmark tab to record and compare performance across different wall adapters and USB Type-C cables.</string>
-    <string name="tips_item_2_title">2. Compare Chargers &amp; Cables</string>
+    <string name="tips_item_2_body">The app runs a background telemetry service to measure power accurately even when the screen is turned off. The live graph displays 🔒 when locked, 📱 when unlocked, and shaded areas so you can track how screen state affects charging speed.</string>
+    <string name="tips_item_2_title">2. Live Graph &amp; Background Tracking</string>
     <string name="tooltip_description">tooltip</string>
     <string name="tooltip_label">show tooltip</string>
     <string name="unit_watts_label">WATTS</string>
@@ -348,23 +353,14 @@
         <attr format="reference" name="fontProviderCerts"/>
         
         <attr name="fontProviderFetchStrategy">
-            <!-- The blocking font fetch works as follows.
-              First, check the local cache, then if the requested font is not cached, request the
-              font from the provider and wait until it is finished.  You can change the length of
-              the timeout by modifying fontProviderFetchTimeout.  If the timeout happens, the
-              default typeface will be used instead. -->
+            
             <enum name="blocking" value="0"/>
-            <!-- The async font fetch works as follows.
-              First, check the local cache, then if the requested font is not cached, trigger a
-              request the font and continue with layout inflation. Once the font fetch succeeds, the
-              target text view will be refreshed with the downloaded font data. The
-              fontProviderFetchTimeout will be ignored if async loading is specified. -->
+            
             <enum name="async" value="1"/>
         </attr>
         
         <attr format="integer" name="fontProviderFetchTimeout">
-            <!-- A special value for the timeout. In this case, the blocking font fetching will not
-              timeout and wait until a reply is received from the font provider. -->
+            
             <enum name="forever" value="-1"/>
         </attr>
         

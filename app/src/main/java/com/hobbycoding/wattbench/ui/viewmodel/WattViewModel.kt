@@ -53,8 +53,10 @@ class WattViewModel(application: Application) : AndroidViewModel(application) {
     init {
         _benchmarkSessions.value = loadSessionsFromDisk()
         _showWelcomeTips.value = checkShouldShowWelcomeTips()
-        startTelemetryLoop()
+        PowerTelemetryService.startService(application, isBenchmark = false)
         observeServiceLiveStats()
+        observeServiceLiveHistory()
+        startTelemetryLoop()
     }
 
     private fun checkShouldShowWelcomeTips(): Boolean {
@@ -88,27 +90,39 @@ class WattViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    private fun observeServiceLiveHistory() {
+        viewModelScope.launch {
+            PowerTelemetryService.liveWattHistory.collect { history ->
+                if (PowerTelemetryService.isServiceRunning.value && history.isNotEmpty()) {
+                    _wattHistory.value = history
+                }
+            }
+        }
+    }
+
     private fun startTelemetryLoop() {
         telemetryJob?.cancel()
         telemetryJob = viewModelScope.launch {
+            val powerManager = getApplication<Application>().getSystemService(Context.POWER_SERVICE) as android.os.PowerManager
             repository.getPowerStatsFlow(_pollingIntervalMs.value).collect { stats ->
                 if (!PowerTelemetryService.isServiceRunning.value) {
                     _powerStats.value = stats
-                }
 
-                // Maintain rolling history of last 60 seconds
-                val currentHistory = _wattHistory.value.toMutableList()
-                currentHistory.add(WattSample(_powerStats.value.powerWatts, _powerStats.value.isCharging, _powerStats.value.batteryLevel, true))
-                if (currentHistory.size > 60) {
-                    currentHistory.removeAt(0)
+                    val isScreenInteractive = powerManager.isInteractive
+                    val currentHistory = _wattHistory.value.toMutableList()
+                    currentHistory.add(WattSample(stats.powerWatts, stats.isCharging, stats.batteryLevel, isScreenInteractive))
+                    if (currentHistory.size > 120) {
+                        currentHistory.removeAt(0)
+                    }
+                    _wattHistory.value = currentHistory
                 }
-                _wattHistory.value = currentHistory
             }
         }
     }
 
     fun resetStats() {
         repository.resetPeakAndAverage()
+        PowerTelemetryService.resetLiveHistory()
         _wattHistory.value = emptyList()
     }
 

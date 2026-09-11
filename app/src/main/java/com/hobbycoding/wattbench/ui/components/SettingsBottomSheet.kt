@@ -1,9 +1,7 @@
 package com.hobbycoding.wattbench.ui.components
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -12,7 +10,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BatteryStd
-import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Policy
 import androidx.compose.material.icons.filled.Settings
@@ -44,7 +41,6 @@ fun SettingsBottomSheet(
     powerStats: PowerStats,
     currentPollingIntervalMs: Long,
     onPollingIntervalChanged: (Long) -> Unit,
-    onExportCSV: (Context) -> Boolean,
     onDismiss: () -> Unit
 ) {
     val context = LocalContext.current
@@ -138,33 +134,7 @@ fun SettingsBottomSheet(
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            // 3. DATA EXPORT
-            SectionTitle(title = stringResource(R.string.section_export), icon = Icons.Default.Download, iconColor = NeonAmber)
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Button(
-                onClick = {
-                    val success = onExportCSV(context)
-                    if (!success) {
-                        Toast.makeText(context, context.getString(R.string.msg_no_sessions_export), Toast.LENGTH_SHORT).show()
-                    }
-                },
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(14.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = NeonAmber)
-            ) {
-                Icon(Icons.Default.Download, contentDescription = null, tint = Color.Black)
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = stringResource(R.string.btn_export_csv),
-                    color = Color.Black,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            // 4. ABOUT & LEGAL
+            // 3. ABOUT & LEGAL
             SectionTitle(title = stringResource(R.string.section_about), icon = Icons.Default.Info, iconColor = NeonPurple)
             Spacer(modifier = Modifier.height(8.dp))
 

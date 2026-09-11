@@ -32,6 +32,10 @@
     <string msgid="8038256446254964252" name="default_error_message">"Geçersiz giriş"</string>
     <string msgid="6312721426453364202" name="default_popup_window_title">"Pop-up Pencere"</string>
     <string name="dialog_close">Kapat</string>
+    <string name="dialog_exit_body">Uygulamayı kapattığınızda batarya canlı güç (giriş/çıkış) ölçümü ve telemetri kaydı sonlandırılacaktır. Çıkmak istediğinize emin misiniz?</string>
+    <string name="dialog_exit_cancel">İptal</string>
+    <string name="dialog_exit_confirm">Çıkış Yap</string>
+    <string name="dialog_exit_title">Uygulamadan Çıkılsın mı?</string>
     <string msgid="1890207353314751437" name="dropdown_menu">"Açılır menü"</string>
     <string name="duration_min">%1$d dk</string>
     <string name="duration_min_sec">%1$d dk %2$d sn</string>
@@ -124,6 +128,7 @@
     <string name="msg_no_sessions_export">Dışa aktarılacak kaydedilmiş benchmark testi yok.</string>
     <string msgid="542007171693138492" name="navigation_menu">"Gezinme menüsü"</string>
     <string msgid="6610465462668679431" name="not_selected">"Seçili değil"</string>
+    <string name="notif_action_stop">Durdur</string>
     <string name="notif_charging">Şarj Ediliyor: %.1f W | %.2f V | %.0f mA</string>
     <string name="notif_discharging">Deşarj Oluyor: %.1f W | Pil: %d%%</string>
     <string name="notif_title_live">⚡ Canlı Watt Telemetrisi</string>
@@ -137,7 +142,7 @@
     <string name="polling_2000ms">Pil Tasarruflu (2 sn)</string>
     <string name="polling_500ms">Hızlı (500 ms)</string>
     <string name="polling_rate_title">Ölçüm Sıklığı (Yenileme Aralığı)</string>
-    <string name="privacy_dialog_body">WattBench gizliliğinize önem verir.\n\n• %100 Yerel İşleme: Tüm voltaj, akım ve Watt ölçümleri tamamen cihazınız üzerinde hesaplanır.\n• Kişisel Veri Toplanmaz: Hiçbir kişisel veri, konum veya cihaz kimliği herhangi bir sunucuya toplanmaz, saklanmaz veya gönderilmez.\n• Veri Dışa Aktarma: Dışa aktarılan CSV dosyaları yerel olarak üretilir ve yalnızca siz paylaşmayı seçtiğinizde geçici önbelleğe yazılır.</string>
+    <string name="privacy_dialog_body">WattBench gizliliğinize önem verir.\n\n• %100 Yerel İşleme: Tüm voltaj, akım ve Watt ölçümleri tamamen cihazınız üzerinde hesaplanır.\n• Kişisel Veri Toplanmaz: Hiçbir kişisel veri, konum veya cihaz kimliği herhangi bir sunucuya toplanmaz, saklanmaz veya gönderilmez.</string>
     <string name="privacy_dialog_title">Gizlilik Politikası</string>
     <string name="profile_fast">Hızlı Şarj (18W+)</string>
     <string name="profile_header">ŞARJ PROFİLİ</string>
@@ -170,8 +175,8 @@
     <string name="tips_dont_show_again">Bunu bir daha gösterme</string>
     <string name="tips_item_1_body">Ekranın güç tüketimi olmadan en doğru Watt değerini ölçmek için test sırasında telefon ekranınızı kilitleyin. Telemetri arka planda kaydetmeye devam edecektir.</string>
     <string name="tips_item_1_title">1. Ekran Kapalıyken Test Edin</string>
-    <string name="tips_item_2_body">Farklı duvar adaptörlerini ve USB Type-C kablolarını kaydetmek ve performanslarını karşılaştırmak için Benchmark sekmesini kullanın.</string>
-    <string name="tips_item_2_title">2. Şarj Cihazı ve Kabloları Karşılaştırın</string>
+    <string name="tips_item_2_body">Ekran kapalıyken kesintisiz ölçüm yapabilmek için uygulama arka planda telemetri servisi çalıştırır. Grafikte ekran kilitlendiğinde 🔒, açıldığında 📱 ikonları ve yeşil gölgeli alan ile ekran durumunun şarj gücüne etkisini canlı izleyebilirsiniz.</string>
+    <string name="tips_item_2_title">2. Canlı Grafikte Ekran ve Arka Plan Takibi</string>
     <string msgid="3765533235322692011" name="tooltip_description">"ipucu"</string>
     <string msgid="3124740595719787496" name="tooltip_label">"ipucunu göster"</string>
     <string name="unit_watts_label">WATT</string>

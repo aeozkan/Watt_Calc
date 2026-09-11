@@ -29,6 +29,10 @@ string chart_realtime_title
 string chart_waiting_data
 string chart_watt_time_graph
 string dialog_close
+string dialog_exit_body
+string dialog_exit_cancel
+string dialog_exit_confirm
+string dialog_exit_title
 string duration_min
 string duration_min_sec
 string duration_sec
@@ -59,6 +63,7 @@ string metric_point_watt
 string metric_temperature
 string metric_voltage
 string msg_no_sessions_export
+string notif_action_stop
 string notif_charging
 string notif_discharging
 string notif_title_live
