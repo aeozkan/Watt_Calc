@@ -24,10 +24,6 @@
         "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-xxhdpi/ic_launcher_icon_foreground.webp"
     },
     {
-        "merged": "com.hobbycoding.wattbench.app-release-45:/drawable-anydpi-v24_ic_launcher_icon_foreground.xml.flat",
-        "source": "com.hobbycoding.wattbench.app-pngs-41:/drawable-anydpi-v24/ic_launcher_icon_foreground.xml"
-    },
-    {
         "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-xhdpi_ic_launcher_icon_foreground.webp.flat",
         "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-xhdpi/ic_launcher_icon_foreground.webp"
     },
@@ -44,24 +40,8 @@
         "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-anydpi-v26/ic_launcher_icon_round.xml"
     },
     {
-        "merged": "com.hobbycoding.wattbench.app-release-45:/drawable-xxhdpi_ic_launcher_icon_foreground.png.flat",
-        "source": "com.hobbycoding.wattbench.app-pngs-41:/drawable-xxhdpi/ic_launcher_icon_foreground.png"
-    },
-    {
-        "merged": "com.hobbycoding.wattbench.app-release-45:/drawable-xhdpi_ic_launcher_icon_foreground.png.flat",
-        "source": "com.hobbycoding.wattbench.app-pngs-41:/drawable-xhdpi/ic_launcher_icon_foreground.png"
-    },
-    {
-        "merged": "com.hobbycoding.wattbench.app-release-45:/drawable-mdpi_ic_launcher_icon_foreground.png.flat",
-        "source": "com.hobbycoding.wattbench.app-pngs-41:/drawable-mdpi/ic_launcher_icon_foreground.png"
-    },
-    {
         "merged": "com.hobbycoding.wattbench.app-release-45:/xml_backup_rules.xml.flat",
         "source": "com.hobbycoding.wattbench.app-main-46:/xml/backup_rules.xml"
-    },
-    {
-        "merged": "com.hobbycoding.wattbench.app-release-45:/drawable-ldpi_ic_launcher_icon_foreground.png.flat",
-        "source": "com.hobbycoding.wattbench.app-pngs-41:/drawable-ldpi/ic_launcher_icon_foreground.png"
     },
     {
         "merged": "com.hobbycoding.wattbench.app-release-45:/drawable_ic_launcher_background.xml.flat",
@@ -88,24 +68,16 @@
         "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-hdpi/ic_launcher_icon_round.webp"
     },
     {
-        "merged": "com.hobbycoding.wattbench.app-release-45:/drawable-hdpi_ic_launcher_icon_foreground.png.flat",
-        "source": "com.hobbycoding.wattbench.app-pngs-41:/drawable-hdpi/ic_launcher_icon_foreground.png"
-    },
-    {
         "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-hdpi_ic_launcher_icon_foreground.webp.flat",
         "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-hdpi/ic_launcher_icon_foreground.webp"
-    },
-    {
-        "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-xxhdpi_ic_launcher_icon_round.webp.flat",
-        "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-xxhdpi/ic_launcher_icon_round.webp"
     },
     {
         "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-mdpi_ic_launcher_icon_round.webp.flat",
         "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-mdpi/ic_launcher_icon_round.webp"
     },
     {
-        "merged": "com.hobbycoding.wattbench.app-release-45:/drawable-xxxhdpi_ic_launcher_icon_foreground.png.flat",
-        "source": "com.hobbycoding.wattbench.app-pngs-41:/drawable-xxxhdpi/ic_launcher_icon_foreground.png"
+        "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-xxhdpi_ic_launcher_icon_round.webp.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/mipmap-xxhdpi/ic_launcher_icon_round.webp"
     },
     {
         "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-mdpi_ic_launcher_icon.webp.flat",
@@ -114,6 +86,10 @@
     {
         "merged": "com.hobbycoding.wattbench.app-release-45:/drawable_ic_launcher_icon_background.xml.flat",
         "source": "com.hobbycoding.wattbench.app-main-46:/drawable/ic_launcher_icon_background.xml"
+    },
+    {
+        "merged": "com.hobbycoding.wattbench.app-release-45:/drawable_ic_launcher_icon_foreground.xml.flat",
+        "source": "com.hobbycoding.wattbench.app-main-46:/drawable/ic_launcher_icon_foreground.xml"
     },
     {
         "merged": "com.hobbycoding.wattbench.app-release-45:/mipmap-xhdpi_ic_launcher_icon.webp.flat",

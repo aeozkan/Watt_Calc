@@ -1,6 +1,10 @@
 package com.hobbycoding.wattbench.ui.screens
 
+import android.widget.Toast
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -13,11 +17,12 @@ import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Speed
 import androidx.compose.material.icons.filled.Thermostat
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -34,6 +39,7 @@ import com.hobbycoding.wattbench.ui.theme.NeonCyan
 import com.hobbycoding.wattbench.ui.theme.NeonGreen
 import com.hobbycoding.wattbench.ui.theme.NeonPurple
 import com.hobbycoding.wattbench.ui.theme.TextSecondary
+import com.hobbycoding.wattbench.util.LocaleHelper
 import java.util.Locale
 
 @Composable
@@ -44,6 +50,10 @@ fun HomeScreen(
     onOpenSettings: () -> Unit
 ) {
     val scrollState = rememberScrollState()
+    val context = LocalContext.current
+    var easterEggTapCount by remember { mutableIntStateOf(0) }
+    var lastEasterEggTapTime by remember { mutableLongStateOf(0L) }
+    var showSecretLanguageDialog by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -74,7 +84,25 @@ fun HomeScreen(
                     )
                 }
                 Spacer(modifier = Modifier.width(12.dp))
-                Column {
+                Column(
+                    modifier = Modifier.clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = null
+                    ) {
+                        val now = System.currentTimeMillis()
+                        if (now - lastEasterEggTapTime > 1500L) {
+                            easterEggTapCount = 1
+                        } else {
+                            easterEggTapCount++
+                        }
+                        lastEasterEggTapTime = now
+
+                        if (easterEggTapCount >= 5) {
+                            easterEggTapCount = 0
+                            showSecretLanguageDialog = true
+                        }
+                    }
+                ) {
                     Text(
                         text = stringResource(R.string.app_header_live),
                         fontSize = 18.sp,
@@ -205,5 +233,110 @@ fun HomeScreen(
         PowerChart(history = wattHistory)
 
         Spacer(modifier = Modifier.height(24.dp))
+    }
+
+    if (showSecretLanguageDialog) {
+        val currentLang = LocaleHelper.getSelectedLanguage(context) // null = system default, "tr" = Türkçe, "en" = English
+
+        AlertDialog(
+            onDismissRequest = { showSecretLanguageDialog = false },
+            title = {
+                Text(
+                    text = "🛠️ Developer Language Mode",
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 16.sp,
+                    color = NeonCyan
+                )
+            },
+            text = {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    Text(
+                        text = "Gizli geliştirici modu aktif. Uygulama arayüz dilini anında değiştirebilirsiniz:",
+                        fontSize = 12.sp,
+                        color = TextSecondary
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+
+                    LanguageOptionItem(
+                        label = "🇹🇷 Türkçe",
+                        isSelected = currentLang == "tr",
+                        onClick = {
+                            showSecretLanguageDialog = false
+                            LocaleHelper.setLanguage(context, "tr")
+                            Toast.makeText(context, "Dil: Türkçe olarak ayarlandı", Toast.LENGTH_SHORT).show()
+                        }
+                    )
+
+                    LanguageOptionItem(
+                        label = "🇬🇧 English",
+                        isSelected = currentLang == "en",
+                        onClick = {
+                            showSecretLanguageDialog = false
+                            LocaleHelper.setLanguage(context, "en")
+                            Toast.makeText(context, "Language: English", Toast.LENGTH_SHORT).show()
+                        }
+                    )
+
+                    LanguageOptionItem(
+                        label = "⚙️ Sistem Varsayılanı (System Default)",
+                        isSelected = currentLang == null,
+                        onClick = {
+                            showSecretLanguageDialog = false
+                            LocaleHelper.setLanguage(context, null)
+                            Toast.makeText(context, "Sistem varsayılan diline dönüldü", Toast.LENGTH_SHORT).show()
+                        }
+                    )
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { showSecretLanguageDialog = false }) {
+                    Text("Kapat", color = NeonCyan)
+                }
+            },
+            containerColor = MaterialTheme.colorScheme.surface,
+            shape = RoundedCornerShape(16.dp)
+        )
+    }
+}
+
+@Composable
+private fun LanguageOptionItem(
+    label: String,
+    isSelected: Boolean,
+    onClick: () -> Unit
+) {
+    Surface(
+        onClick = onClick,
+        shape = RoundedCornerShape(12.dp),
+        color = if (isSelected) MaterialTheme.colorScheme.surfaceVariant else Color.Transparent,
+        border = if (isSelected) BorderStroke(1.dp, NeonCyan) else BorderStroke(1.dp, Color(0xFF334155)),
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 14.dp, vertical = 12.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = label,
+                fontSize = 14.sp,
+                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
+                color = if (isSelected) NeonCyan else MaterialTheme.colorScheme.onSurface
+            )
+            if (isSelected) {
+                Text(
+                    text = "✓",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = NeonCyan
+                )
+            }
+        }
     }
 }

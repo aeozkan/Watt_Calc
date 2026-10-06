@@ -206,6 +206,10 @@ string close_sheet
 string default_error_message
 string default_popup_window_title
 string dialog_close
+string dialog_exit_body
+string dialog_exit_cancel
+string dialog_exit_confirm
+string dialog_exit_title
 string dropdown_menu
 string duration_min
 string duration_min_sec
@@ -298,6 +302,7 @@ string metric_voltage
 string msg_no_sessions_export
 string navigation_menu
 string not_selected
+string notif_action_stop
 string notif_charging
 string notif_discharging
 string notif_title_live

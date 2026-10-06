@@ -74,6 +74,7 @@
     <string name="notif_title_live">⚡ Live Watt Telemetry</string>
     <string name="notif_charging">Charging: %.1f W | %.2f V | %.0f mA</string>
     <string name="notif_discharging">Discharging: %.1f W | Battery: %d%%</string>
+    <string name="notif_action_stop">Stop</string>
 
     <!-- Drawer Menu & Features -->
     <string name="menu_title">Settings &amp; Tools</string>
@@ -102,21 +103,27 @@
     <string name="menu_privacy_policy">Privacy Policy</string>
     <string name="menu_rate_app">Rate App on Play Store</string>
     <string name="menu_about">About WattBench</string>
-    <string name="app_version_info">WattBench v1.0.0 (Build 1)</string>
+    <string name="app_version_info">WattBench v1.1.0</string>
 
     <string name="privacy_dialog_title">Privacy Policy</string>
     <string name="privacy_dialog_body">WattBench respects your privacy.\n\n• 100% Local Processing: All voltage, current, and wattage measurements are calculated strictly on your device.\n• No Personal Data Collection: We do not collect, store, or transmit any personal data, location, or identifiers to any remote server.\n• File Export: Exported CSV files are generated locally and stored only in your device\'s temporary cache folder when you choose to share them.</string>
     <string name="dialog_close">Close</string>
 
     <string name="about_dialog_title">About WattBench</string>
-    <string name="about_dialog_body">WattBench is a modern, high-precision power telemetry and charger benchmark application.\n\nDesigned for technology enthusiasts to measure live wattage, voltage, current, and test USB cables &amp; chargers with sub-second accuracy.\n\nVersion: 1.0.0</string>
+    <string name="about_dialog_body">WattBench is a modern, high-precision power telemetry and charger benchmark application.\n\nDesigned for technology enthusiasts to measure live wattage, voltage, current, and test USB cables &amp; chargers with sub-second accuracy.\n\nVersion: 1.1.0</string>
 
     <!-- Welcome & Tips Dialog -->
     <string name="tips_dialog_title">💡 Tips for Best Results</string>
     <string name="tips_item_1_title">1. Test With Screen Locked</string>
     <string name="tips_item_1_body">For the most accurate wattage measurement without screen power consumption, lock your phone screen during testing. Power telemetry will continue recording in the background.</string>
     <string name="tips_item_2_title">2. Compare Chargers &amp; Cables</string>
-    <string name="tips_item_2_body">Use the Benchmark tab to record and compare performance across different wall adapters and USB Type-C cables.</string>
+    <string name="tips_item_2_body">Use the Benchmark tab to record and compare performance across different wall adapters and USB Type-C cables. The live chart displays 🔒 when locked, 📱 when unlocked, and shaded areas to track how screen state affects charging speed.</string>
     <string name="tips_dont_show_again">Don\'t show this again</string>
     <string name="btn_got_it">Got It!</string>
+
+    <!-- Exit Confirmation Dialog -->
+    <string name="dialog_exit_title">Exit Application?</string>
+    <string name="dialog_exit_body">Closing the app will terminate real-time battery power (input/output) measurement and telemetry recording. Are you sure you want to exit?</string>
+    <string name="dialog_exit_confirm">Exit</string>
+    <string name="dialog_exit_cancel">Cancel</string>
 </resources>

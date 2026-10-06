@@ -1,6 +1,7 @@
 package com.hobbycoding.wattbench
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -9,8 +10,10 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import com.hobbycoding.wattbench.service.PowerTelemetryService
 import com.hobbycoding.wattbench.ui.screens.MainTabScreen
 import com.hobbycoding.wattbench.ui.theme.WattCalculatorTheme
+import com.hobbycoding.wattbench.util.LocaleHelper
 
 class MainActivity : ComponentActivity() {
 
@@ -19,7 +22,15 @@ class MainActivity : ComponentActivity() {
             // Permission result handled
         }
 
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.wrapContext(newBase))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        val selectedLang = LocaleHelper.getSelectedLanguage(this)
+        if (selectedLang != null) {
+            LocaleHelper.applyLanguage(this, selectedLang)
+        }
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
@@ -29,6 +40,13 @@ class MainActivity : ComponentActivity() {
             WattCalculatorTheme {
                 MainTabScreen()
             }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (isFinishing) {
+            PowerTelemetryService.stopService(this)
         }
     }
 

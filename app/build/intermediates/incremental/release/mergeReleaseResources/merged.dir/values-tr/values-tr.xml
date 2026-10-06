@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="about_dialog_body">WattBench, yüksek hassasiyetli bir canlı telemetri ve şarj cihazı benchmark uygulamasıdır.\n\nTeknoloji meraklılarının canlı Watt, voltaj ve akım değerlerini ölçmesi, USB kablolarını ve şarj cihazlarını milisaniyelik hassasiyetle test etmesi için tasarlanmıştır.\n\nSürüm: 1.0.0</string>
+    <string name="about_dialog_body">WattBench, yüksek hassasiyetli bir canlı telemetri ve şarj cihazı benchmark uygulamasıdır.\n\nTeknoloji meraklılarının canlı Watt, voltaj ve akım değerlerini ölçmesi, USB kablolarını ve şarj cihazlarını milisaniyelik hassasiyetle test etmesi için tasarlanmıştır.\n\nSürüm: 1.1.0</string>
     <string name="about_dialog_title">WattBench Hakkında</string>
     <string name="app_header_benchmark">ŞARJ CİHAZI &amp; KABLO TESTİ</string>
     <string name="app_header_live">WATT HESAPLAYICI</string>
     <string name="app_name">WattBench</string>
-    <string name="app_version_info">WattBench v1.0.0 (Sürüm 1)</string>
+    <string name="app_version_info">WattBench v1.1.0</string>
     <string name="battery_capacity_label">Fabrika Pil Kapasitesi</string>
     <string name="battery_health_label">Pil Sağlığı</string>
     <string name="benchmark_in_progress">TEST DEVAM EDİYOR (ARKA PLAN VERİSİ KAYDEDİLİYOR)...</string>
@@ -32,6 +32,10 @@
     <string msgid="8038256446254964252" name="default_error_message">"Geçersiz giriş"</string>
     <string msgid="6312721426453364202" name="default_popup_window_title">"Pop-up Pencere"</string>
     <string name="dialog_close">Kapat</string>
+    <string name="dialog_exit_body">Uygulamayı kapattığınızda batarya canlı güç (giriş/çıkış) ölçümü ve telemetri kaydı sonlandırılacaktır. Çıkmak istediğinize emin misiniz?</string>
+    <string name="dialog_exit_cancel">İptal</string>
+    <string name="dialog_exit_confirm">Çıkış Yap</string>
+    <string name="dialog_exit_title">Uygulamadan Çıkılsın mı?</string>
     <string msgid="1890207353314751437" name="dropdown_menu">"Açılır menü"</string>
     <string name="duration_min">%1$d dk</string>
     <string name="duration_min_sec">%1$d dk %2$d sn</string>
@@ -124,6 +128,7 @@
     <string name="msg_no_sessions_export">Dışa aktarılacak kaydedilmiş benchmark testi yok.</string>
     <string msgid="542007171693138492" name="navigation_menu">"Gezinme menüsü"</string>
     <string msgid="6610465462668679431" name="not_selected">"Seçili değil"</string>
+    <string name="notif_action_stop">Durdur</string>
     <string name="notif_charging">Şarj Ediliyor: %.1f W | %.2f V | %.0f mA</string>
     <string name="notif_discharging">Deşarj Oluyor: %.1f W | Pil: %d%%</string>
     <string name="notif_title_live">⚡ Canlı Watt Telemetrisi</string>
@@ -170,7 +175,7 @@
     <string name="tips_dont_show_again">Bunu bir daha gösterme</string>
     <string name="tips_item_1_body">Ekranın güç tüketimi olmadan en doğru Watt değerini ölçmek için test sırasında telefon ekranınızı kilitleyin. Telemetri arka planda kaydetmeye devam edecektir.</string>
     <string name="tips_item_1_title">1. Ekran Kapalıyken Test Edin</string>
-    <string name="tips_item_2_body">Farklı duvar adaptörlerini ve USB Type-C kablolarını kaydetmek ve performanslarını karşılaştırmak için Benchmark sekmesini kullanın.</string>
+    <string name="tips_item_2_body">Farklı duvar adaptörlerini ve USB Type-C kablolarını kaydetmek ve performanslarını karşılaştırmak için Benchmark sekmesini kullanın. Grafikte ekran kilitlendiğinde 🔒, açıldığında 📱 ikonları ve yeşil gölgeli alan ile ekran durumunun şarj gücüne etkisini izleyebilirsiniz.</string>
     <string name="tips_item_2_title">2. Şarj Cihazı ve Kabloları Karşılaştırın</string>
     <string msgid="3765533235322692011" name="tooltip_description">"ipucu"</string>
     <string msgid="3124740595719787496" name="tooltip_label">"ipucunu göster"</string>

@@ -30,6 +30,7 @@ class PowerTelemetryService : Service() {
     companion object {
         const val CHANNEL_ID = "watt_telemetry_channel"
         const val NOTIFICATION_ID = 1001
+        const val ACTION_STOP_SERVICE = "com.hobbycoding.wattbench.ACTION_STOP_SERVICE"
 
         private val _isServiceRunning = MutableStateFlow(false)
         val isServiceRunning: StateFlow<Boolean> = _isServiceRunning.asStateFlow()
@@ -45,6 +46,13 @@ class PowerTelemetryService : Service() {
 
         private val _benchmarkAmpSamples = mutableListOf<Double>()
         val benchmarkAmpSamples: List<Double> get() = _benchmarkAmpSamples
+
+        private val _liveWattHistory = MutableStateFlow<List<WattSample>>(emptyList())
+        val liveWattHistory: StateFlow<List<WattSample>> = _liveWattHistory.asStateFlow()
+
+        fun resetLiveHistory() {
+            _liveWattHistory.value = emptyList()
+        }
 
         var isRecordingBenchmark = false
         var benchmarkStartTime = 0L
@@ -86,6 +94,11 @@ class PowerTelemetryService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        if (intent?.action == ACTION_STOP_SERVICE) {
+            stopSelf()
+            return START_NOT_STICKY
+        }
+
         val isBenchmark = intent?.getBooleanExtra("IS_BENCHMARK", false) ?: false
         if (isBenchmark) {
             isRecordingBenchmark = true
@@ -98,10 +111,17 @@ class PowerTelemetryService : Service() {
         }
 
         startForeground(NOTIFICATION_ID, buildNotification("Monitoring power telemetry..."))
-        _isServiceRunning.value = true
-        startTelemetryLoop()
+        if (!_isServiceRunning.value) {
+            _isServiceRunning.value = true
+            startTelemetryLoop()
+        }
 
-        return START_STICKY
+        return START_NOT_STICKY
+    }
+
+    override fun onTaskRemoved(rootIntent: Intent?) {
+        super.onTaskRemoved(rootIntent)
+        stopSelf()
     }
 
     private fun startTelemetryLoop() {
@@ -111,15 +131,22 @@ class PowerTelemetryService : Service() {
                 _liveStats.value = stats
                 val isScreenInteractive = powerManager.isInteractive
 
+                val sample = WattSample(
+                    watt = stats.powerWatts,
+                    isCharging = stats.isCharging,
+                    batteryLevel = stats.batteryLevel,
+                    isScreenOn = isScreenInteractive
+                )
+
+                val currentHistory = _liveWattHistory.value.toMutableList()
+                currentHistory.add(sample)
+                if (currentHistory.size > 120) {
+                    currentHistory.removeAt(0)
+                }
+                _liveWattHistory.value = currentHistory
+
                 if (isRecordingBenchmark) {
-                    _benchmarkWattSamples.add(
-                        WattSample(
-                            watt = stats.powerWatts,
-                            isCharging = stats.isCharging,
-                            batteryLevel = stats.batteryLevel,
-                            isScreenOn = isScreenInteractive
-                        )
-                    )
+                    _benchmarkWattSamples.add(sample)
                     _benchmarkVoltSamples.add(stats.voltageVolts)
                     _benchmarkAmpSamples.add(stats.currentAmperes)
                 }
@@ -148,6 +175,16 @@ class PowerTelemetryService : Service() {
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
 
+        val stopIntent = Intent(this, PowerTelemetryService::class.java).apply {
+            action = ACTION_STOP_SERVICE
+        }
+        val stopPendingIntent = PendingIntent.getService(
+            this,
+            1,
+            stopIntent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
         val title = if (isRecordingBenchmark) getString(R.string.notif_title_recording) else getString(R.string.notif_title_live)
 
         return NotificationCompat.Builder(this, CHANNEL_ID)
@@ -155,6 +192,11 @@ class PowerTelemetryService : Service() {
             .setContentText(text)
             .setSmallIcon(android.R.drawable.ic_dialog_info)
             .setContentIntent(pendingIntent)
+            .addAction(
+                android.R.drawable.ic_menu_close_clear_cancel,
+                getString(R.string.notif_action_stop),
+                stopPendingIntent
+            )
             .setOngoing(true)
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .build()
@@ -184,5 +226,11 @@ class PowerTelemetryService : Service() {
         }
         _isServiceRunning.value = false
         isRecordingBenchmark = false
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            stopForeground(STOP_FOREGROUND_REMOVE)
+        } else {
+            @Suppress("DEPRECATION")
+            stopForeground(true)
+        }
     }
 }
